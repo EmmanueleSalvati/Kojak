@@ -1,3 +1,5 @@
 Kojak.sublime*
 .ipynb_checkpoints
 *.pyc
+data
+.DS_Store
