@@ -7,6 +7,8 @@ Thank you!
 """
 
 import pandas as pd
+import numpy as np
+from dateutil import parser
 import requests
 import lxml.html as lh
 import os.path
@@ -16,8 +18,8 @@ import glob
 import operator
 import sys
 
-#  'GLOBALEVENTID',
-COLUMN_NAMES = ['SQLDATE',
+#  This is the index: 'GLOBALEVENTID',
+COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
                 'Actor1Code', 'Actor1Name', 'Actor1CountryCode',
                 'Actor1KnownGroupCode', 'Actor1EthnicCode',
                 'Actor1Religion1Code', 'Actor1Religion2Code',
@@ -33,11 +35,42 @@ COLUMN_NAMES = ['SQLDATE',
                 'DATEADDED', 'SOURCEURL'
                 ]
 
+typeslist = [str,
+             str, str, str,
+             str, str,
+             str, str,
+             str, str, str,
+             str, str, str,
+             str, str,
+             str, str,
+             str, str, str,
+             np.int64, np.float64, np.int64, np.float64,
+             str, str,
+             str, str,
+             str, str,
+             str, str]
+
+
+typesdict = {}
+for i in range(len(typeslist)):
+    typesdict[COLUMN_NAMES[i+1]] = typeslist[i]
+
 gdelt_base_url = 'http://data.gdeltproject.org/events/'
 local_path = '/Users/JerkFace/Metis/Projects/Kojak/'
 
 
-def filelist():
+def min_date(early, current):
+    print early, current
+    begin_date = parser.parse(early)
+    current_date = parser.parse(current)
+
+    if current_date < begin_date:
+        return False
+    else:
+        return True
+
+
+def filelist(mindate):
     """Get the file list to download"""
 
     # get the list of all the links on the gdelt file page
@@ -47,7 +80,8 @@ def filelist():
 
     # separate out those links that begin with four digits
     file_list = [x for x in link_list if str.isdigit(x[0:4]) and
-                 x.startswith('201503')]
+                 x.startswith('2015') and
+                 min_date(mindate, x.split('.export')[0])]
 
     return file_list
 
@@ -62,30 +96,53 @@ def my_parser(in_file_name):
     with open(in_file_name, 'r') as infile:
         full_df = pd.read_table(infile, names=colnames, index_col=0,
                                 usecols=COLUMN_NAMES)
+                                # , dtype=typesdict,
+                                # engine='c')
 
     return full_df
+
+
+def check_file(filename):
+    """Check whether the zip or csv files already exist in tmp/ or data/"""
+
+    if os.path.isfile(local_path + 'tmp/' + filename) or\
+       os.path.isfile(local_path + 'data/' + filename.strip('.zip')):
+        return True
+
+    return False
 
 
 def download_files(file_list):
     """download the files in filelist"""
 
-    infilecounter = 0
-    outfilecounter = 0
+    # infilecounter = 0
 
-    for compressed_file in file_list[infilecounter:]:
-        print compressed_file
+    # for compressed_file in file_list[infilecounter:]:
+    for compressed_file in file_list:
+        print compressed_file,
+
+        # cond1 = (not os.path.isfile(local_path + 'tmp/' + compressed_file))
+        # cond2 = (not os.path.isfile(local_path + 'data/' + compressed_file
+        #          .strip('.zip')))
 
         # if we dont have the compressed file stored locally, go get it.
         # Keep trying if necessary.
-        while not os.path.isfile(local_path + 'tmp/' + compressed_file):
-            print 'downloading,',
-            urllib.urlretrieve(url=gdelt_base_url+compressed_file,
-                               filename=local_path + 'tmp/' + compressed_file)
+        # while cond1 and cond2:
+        #     print 'downloading,',
+        #     urllib.urlretrieve(url=gdelt_base_url+compressed_file,
+        #                        filename=local_path + 'tmp/' + compressed_file)
+        if check_file(compressed_file):
+            continue
+
+        print 'downloading,',
+        urllib.urlretrieve(url=gdelt_base_url + compressed_file,
+                           filename=local_path + 'tmp/' + compressed_file)
 
         # extract the contents of the compressed file to a temporary directory
-        print 'extracting,',
+        print 'extracting,\n',
         z = zipfile.ZipFile(file=local_path + 'tmp/' + compressed_file,
                             mode='r')
+        print z.namelist(),
         for name in z.namelist():
             z.extract(name, path=local_path + 'tmp/')
 
@@ -94,23 +151,15 @@ def download_files(file_list):
             infile_name = 'tmp/' + name
             df = my_parser(infile_name)
 
-            print 'saving to data/'
+            print 'saving to data/',
             outfile_name = local_path+'data/' + name
             with open(outfile_name, 'w') as outfile:
                 df.to_csv(outfile_name)
 
-            for filetoremove in glob.glob(local_path + 'tmp/*'):
-                os.remove(filetoremove)
+            print 'removing tmp files',
+            os.remove(local_path + 'tmp/' + name)
 
-        #     # open the infile and outfile
-        #     with open(infile_name, mode='r') as infile, open(outfile_name, mode='w') as outfile:
-        #         for line in infile:
-        #             # extract lines with our interest country code
-        #             if fips_country_code in operator.itemgetter(51, 37, 44)(line.split('\t')):
-        #                 outfile.write(line)
-        #         outfilecounter +=1
-
-        #     # delete the temporary file
-        #     os.remove(infile_name)
-        # infilecounter +=1
+        os.remove(local_path + 'tmp/' + compressed_file)
+        # for filetoremove in glob.glob(local_path + 'tmp/*'):
+        #     os.remove(filetoremove)
         print 'done'
