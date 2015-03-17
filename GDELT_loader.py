@@ -4,7 +4,8 @@ import pandas as pd
 import numpy as np
 from os import listdir
 
-COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
+# the index is 'GLOBALEVENTID'
+COLUMN_NAMES = ['SQLDATE',
                 'Actor1Code', 'Actor1Name', 'Actor1CountryCode',
                 'Actor1KnownGroupCode', 'Actor1EthnicCode',
                 'Actor1Religion1Code', 'Actor1Religion2Code',
@@ -20,7 +21,7 @@ COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
                 'DATEADDED', 'SOURCEURL'
                 ]
 
-typeslist = [str,
+TYPESLIST = [str,
              str, str, str,
              str, str,
              str, str,
@@ -36,20 +37,39 @@ typeslist = [str,
              str, str]
 
 
-typesdict = {}
-for i in range(len(typeslist)):
-    typesdict[COLUMN_NAMES[i+1]] = typeslist[i]
+TYPESDICT = {}
+for i in range(len(TYPESLIST)):
+    TYPESDICT[COLUMN_NAMES[i]] = TYPESLIST[i]
 
 
-def load_csv(path):
+def load_csv(path, singlefile=None):
     """Creates a DataFrame with all the csv files in the path directory"""
+
+    if singlefile:
+        df = pd.read_csv(path + '/' + singlefile, dtype=TYPESDICT)
+        df.set_index('GLOBALEVENTID', inplace=True)
+
+        return df
 
     df = pd.DataFrame()
     csvs = listdir(path)
     for csvfile in csvs:
-        temp_df = pd.read_csv(path + '/' + csvfile, index_col='GLOBALEVENTID',
-                              dtype=typesdict)
+        temp_df = pd.read_csv(path + '/' + csvfile, dtype=TYPESDICT)
         df = pd.concat([df, temp_df], join='inner')
-        print df.shape
+        print csvfile, df.shape
+    df.set_index('GLOBALEVENTID', inplace=True)
 
     return df
+
+
+def country_codes():
+    countries = pd.read_table("countrynames.txt", sep='; ', header=None,
+                              skiprows=23, encoding='utf-8', usecols=[0, 4])
+
+    return countries
+
+
+def country_name(code):
+    codes_table = country_codes()
+
+    return codes_table.loc[codes_table[0] == code, 4].iloc[0]

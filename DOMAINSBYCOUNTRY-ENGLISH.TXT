@@ -236,7 +236,7 @@ af.mil	US	United States
 afp.com	US	United States
 afr.com	AS	Australia
 africa21digital.com	MZ	Mozambique
-africaintelligence.com	OC	
+africaintelligence.com	FR	France
 africaleader.com	US	United States
 africanbrains.net	UK	United Kingdom
 africanbusinessreview.co.za	US	United States
@@ -831,7 +831,7 @@ azsnakepit.com	US	United States
 azstarnet.com	US	United States
 aztecpressonline.com	US	United States
 azzaman.com	IZ	Iraq
-b92.net	RB	
+b92.net	RI	Serbia
 babycenter.com	US	United States
 backstage.com	US	United States
 baconsrebellion.com	US	United States
@@ -5224,7 +5224,7 @@ inquirer.net	RP	Philippines
 inquisitr.com	US	United States
 insead.edu	US	United States
 inseconline.org	NP	Nepal
-inserbia.info	RB	
+inserbia.info	RI	Serbia
 insidearm.com	US	United States
 insidebayarea.com	US	United States
 insidebiz.com	US	United States

@@ -15,8 +15,7 @@ import os.path
 import urllib
 import zipfile
 import glob
-import operator
-import sys
+import re
 
 #  This is the index: 'GLOBALEVENTID',
 COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
@@ -35,32 +34,34 @@ COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
                 'DATEADDED', 'SOURCEURL'
                 ]
 
-typeslist = [str,
-             str, str, str,
-             str, str,
-             str, str,
-             str, str, str,
-             str, str, str,
-             str, str,
-             str, str,
-             str, str, str,
-             np.int64, np.float64, np.int64, np.float64,
-             str, str,
-             str, str,
-             str, str,
-             str, str]
-
-
-typesdict = {}
-for i in range(len(typeslist)):
-    typesdict[COLUMN_NAMES[i+1]] = typeslist[i]
-
 gdelt_base_url = 'http://data.gdeltproject.org/events/'
 local_path = '/Users/JerkFace/Metis/Projects/Kojak/'
 
+# Load the table of countries' news
+SOURCE_DF = pd.read_table('DOMAINSBYCOUNTRY-ENGLISH.TXT')
+SOURCE_DF.drop(['FIPSCountryCode'], axis=1, inplace=True)
+
+
+def url_domain(url):
+    """Get the domain from a given url,
+    e.g. http://100r.org becomes 100r.org"""
+
+    match = re.search(r'(https?)://(.+)', url)
+    if match:
+        url = match.group(2)
+
+    wmatch = re.search(r'(www)\.(.+)', url)
+    if wmatch:
+        url = wmatch.group(2)
+
+    if '/' in url:
+        domain = url.split('/')[0]
+        return domain
+    else:
+        return url
+
 
 def min_date(early, current):
-    print early, current
     begin_date = parser.parse(early)
     current_date = parser.parse(current)
 
@@ -87,17 +88,20 @@ def filelist(mindate):
 
 
 def my_parser(in_file_name):
-    """Load the infile, get the columns that I need, write an outfile, trash
-    the infile"""
+    """Load the infile, get the columns that I need, adds the Domain column,
+    uses only the rows which have a URL from a source contained in SOURCE_DF,
+    write an outfile, trash the infile"""
 
     colnames = pd.read_excel('CSV.header.fieldids.xlsx', sheetname='Sheet1',
                              index_col='Column ID', parse_cols=1)['Field Name']
 
     with open(in_file_name, 'r') as infile:
-        full_df = pd.read_table(infile, names=colnames, index_col=0,
+        full_df = pd.read_table(infile, names=colnames,  # index_col=0,
                                 usecols=COLUMN_NAMES)
-                                # , dtype=typesdict,
-                                # engine='c')
+    full_df['Domain'] = full_df['SOURCEURL'].apply(url_domain)
+    full_df = pd.merge(full_df, SOURCE_DF,
+                       on='Domain', how='inner', left_index=True)
+    full_df.set_index("GLOBALEVENTID", inplace=True)
 
     return full_df
 
@@ -115,22 +119,9 @@ def check_file(filename):
 def download_files(file_list):
     """download the files in filelist"""
 
-    # infilecounter = 0
-
-    # for compressed_file in file_list[infilecounter:]:
     for compressed_file in file_list:
         print compressed_file,
 
-        # cond1 = (not os.path.isfile(local_path + 'tmp/' + compressed_file))
-        # cond2 = (not os.path.isfile(local_path + 'data/' + compressed_file
-        #          .strip('.zip')))
-
-        # if we dont have the compressed file stored locally, go get it.
-        # Keep trying if necessary.
-        # while cond1 and cond2:
-        #     print 'downloading,',
-        #     urllib.urlretrieve(url=gdelt_base_url+compressed_file,
-        #                        filename=local_path + 'tmp/' + compressed_file)
         if check_file(compressed_file):
             continue
 
@@ -147,6 +138,7 @@ def download_files(file_list):
             z.extract(name, path=local_path + 'tmp/')
 
             # parse each of the csv files in the working directory,
+            # THIS IS WHERE ALL THE CHOPPING, MERGING, ETC. HAPPENS
             print 'parsing,',
             infile_name = 'tmp/' + name
             df = my_parser(infile_name)
@@ -160,6 +152,4 @@ def download_files(file_list):
             os.remove(local_path + 'tmp/' + name)
 
         os.remove(local_path + 'tmp/' + compressed_file)
-        # for filetoremove in glob.glob(local_path + 'tmp/*'):
-        #     os.remove(filetoremove)
         print 'done'
