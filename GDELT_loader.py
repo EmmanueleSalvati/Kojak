@@ -4,29 +4,6 @@ import pandas as pd
 import numpy as np
 from os import listdir
 
-# the index is 'GLOBALEVENTID'
-COLUMN_NAMES = ['SQLDATE',
-                'Actor1Code', 'Actor1Name', 'Actor1CountryCode',
-                'Actor1KnownGroupCode', 'Actor1EthnicCode',
-                'Actor1Religion1Code', 'Actor1Religion2Code',
-                'Actor1Type1Code', 'Actor1Type2Code', 'Actor1Type3Code',
-                'Actor2Code', 'Actor2Name', 'Actor2CountryCode',
-                'Actor2KnownGroupCode', 'Actor2EthnicCode',
-                'Actor2Religion1Code', 'Actor2Religion2Code',
-                'Actor2Type1Code', 'Actor2Type2Code', 'Actor2Type3Code',
-                ''
-                'EventCode', 'GoldsteinScale', 'NumSources', 'AvgTone',
-                # 'Actor1Geo_ADM1Code', 'Actor1Geo_FeatureID',
-                # 'Actor2Geo_ADM1Code', 'Actor2Geo_FeatureID',
-                # 'ActionGeo_ADM1Code', 'ActionGeo_FeatureID',
-                'ActionCountry',
-                'DATEADDED', 'SOURCEURL'
-                ]
-
-# TYPESLIST = [str, str, str, str, str, str, str, str, str, str, str, str, str,
-#              str, str, str, str, str, str, str, str, str, np.float64,
-#              np.int64, np.float64, str, str, str, str, str, str, str, str]
-
 TYPESDICT = {}
 TYPESDICT['GLOBALEVENTID'] = str
 TYPESDICT['SQLDATE'] = str
@@ -35,12 +12,6 @@ TYPESDICT['Actor2Name'] = str
 TYPESDICT['GoldsteinScale'] = np.float64
 TYPESDICT['NumSources'] = np.int64
 TYPESDICT['AvgTone'] = np.float64
-# TYPESDICT['Actor1Geo_ADM1Code'] = str
-# TYPESDICT['Actor1Geo_FeatureID'] = str
-# TYPESDICT['Actor2Geo_ADM1Code'] = str
-# TYPESDICT['Actor2Geo_FeatureID'] = str
-# TYPESDICT['ActionGeo_ADM1Code'] = str
-# TYPESDICT['ActionGeo_FeatureID'] = str
 TYPESDICT['DATEADDED'] = str
 TYPESDICT['SOURCEURL'] = str
 TYPESDICT['DomainCountry'] = str

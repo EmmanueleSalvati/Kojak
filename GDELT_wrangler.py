@@ -28,9 +28,6 @@ COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
                 'Actor2Religion1Code', 'Actor2Religion2Code',
                 'Actor2Type1Code', 'Actor2Type2Code', 'Actor2Type3Code',
                 'EventCode', 'GoldsteinScale', 'NumSources', 'AvgTone',
-                # 'Actor1Geo_ADM1Code', 'Actor1Geo_FeatureID',
-                # 'Actor2Geo_ADM1Code', 'Actor2Geo_FeatureID',
-                # 'ActionGeo_ADM1Code', 'ActionGeo_FeatureID',
                 'ActionGeo_CountryCode',
                 'DATEADDED', 'SOURCEURL'
                 ]
@@ -45,9 +42,6 @@ TYPESLIST = [str, str,
              str, str,
              str, str, str,
              str, np.float64, np.int64, np.float64,
-             # str, str,
-             # str, str,
-             # str, str,
              str,
              str, str]
 
@@ -65,14 +59,15 @@ SOURCE_DF.set_index('Domain', inplace=True)
 SOURCE_DICT = SOURCE_DF.to_dict()['CountryHumanName']
 
 CAMEO_DF = pd.read_table('CAMEO.eventcodes.txt', dtype=str)
-# CAMEO_DF.set_index('CAMEOEVENTCODE', inplace=True)
-# CAMEO_DICT = CAMEO_DF.to_dict()['EVENTDESCRIPTION']
 
 CAMEO_TYPE_DF = pd.read_table('CAMEO.type.txt', dtype=str)
 CAMEO_KNOWNGROUP_DF = pd.read_table('CAMEO.knowngroup.txt', dtype=str)
 CAMEO_ETHNIC_DF = pd.read_table('CAMEO.ethnic.txt', dtype=str)
 CAMEO_RELIGION_DF = pd.read_table('CAMEO.religion.txt', dtype=str)
 CAMEO_COUNTRY_DF = pd.read_table('CAMEO.country.txt', dtype=str)
+
+FIPS_CODES = pd.read_csv('wikipedia-fips-codes.csv')
+ISO_CODES = pd.read_csv('wikipedia-iso-country-codes.csv')
 
 
 def url_domain(url):
@@ -291,24 +286,24 @@ def match_columns(df):
     secrel2.drop('Actor2Religion2Code', axis=1, inplace=True)
     del thirdtype2, secrel1
 
-    # # Match country code of actors
-    # countrycode = pd.merge(secrel2, CAMEO_COUNTRY_DF,
-    #                        left_on='ActionGeo_CountryCode',
-    #                        right_on='CODE', how='left', left_index=True)
-    # if 'LABEL' in countrycode:
-    #     countrycode['ActionCountry'] = countrycode['LABEL']
-    #     countrycode.drop(['CODE', 'LABEL', 'ActionGeo_CountryCode'],
-    #                      axis=1, inplace=True)
-    # else:
-    #     countrycode['ActionCountry'] = np.nan
-    # del secrel2
+    # Match country code of actions
+    countrycode = pd.merge(secrel2, FIPS_CODES,
+                           left_on='ActionGeo_CountryCode',
+                           right_on='Code', how='left', left_index=True)
+    if 'Short-form name' in countrycode:
+        countrycode['ActionCountry'] = countrycode['Short-form name']
+        countrycode.drop(['Code', 'Short-form name', 'ActionGeo_CountryCode'],
+                         axis=1, inplace=True)
+    else:
+        countrycode['ActionCountry'] = np.nan
+    del secrel2
 
     # Match Event Code
-    final = pd.merge(secrel2, CAMEO_DF, left_on='EventCode',
+    final = pd.merge(countrycode, CAMEO_DF, left_on='EventCode',
                      right_on='CAMEOEVENTCODE', how='left', left_index=True)
     if 'EVENTDESCRIPTION' in final:
         final.drop(['EventCode', 'CAMEOEVENTCODE'], axis=1, inplace=True)
-    del secrel2
+    del countrycode
 
     return final
 
@@ -316,26 +311,43 @@ def match_columns(df):
 def country_name(code):
     """Simple function to understand a country code"""
 
-    # codes_table = pd.read_table("countrynames.txt", sep='; ', header=None,
-    #                             skiprows=23, encoding='utf-8',
-    #                             usecols=[0, 1, 4])
-    wiki_codes = pd.read_csv('wikipedia-iso-country-codes.csv')
+    fips_codes = pd.read_csv('wikipedia-fips-codes.csv')
+    iso_codes = pd.read_csv('wikipedia-iso-country-codes.csv')
 
-    print 'code:', code
-    if not code:
+    # print 'code:', code, 'type:', type(code)
+    if type(code) == float and np.isnan(code):
         return np.nan
 
     if code == 'UK':
         code = 'GB'
 
-    if len(code) == 3:
-        country = wiki_codes.loc[wiki_codes['Alpha-3 code'] == code,
-                                 'English short name (upper/lower case)']\
-                                 .iloc[0]
-    else:
-        country = wiki_codes.loc[wiki_codes['Alpha-2 code'] == code,
-                                 'English short name (upper/lower case)']\
-                                 .iloc[0]
+    if code == 'VM':
+        code = 'VN'
+
+    if code == 'RB':
+        code = 'RS'
+
+    if code == 'OS':
+        return 'Arafura Sea'
+
+    if code == 'OC':
+        return 'Indian Ocean'
+
+    # if len(code) == 3:
+    #     country = wiki_codes.loc[wiki_codes['Alpha-3 code'] == code,
+    #                              'English short name (upper/lower case)']\
+    #                              .iloc[0]
+    # else:
+    if len(iso_codes[iso_codes['Alpha-2 code'] == code]) > 0:
+        country = iso_codes.loc[iso_codes['Alpha-2 code'] == code,
+                                'English short name (upper/lower case)']\
+                                .iloc[0]
+    else:  # len(fips_codes[fips_codes['Code'] == code]) > 0:
+        country = fips_codes.loc[fips_codes['Code'] == code,
+                                 'Short-form name'].iloc[0]
+    # else:
+    #     return np.nan
+
     return country
 
 
@@ -356,13 +368,9 @@ def my_parser(in_file_name):
     full_df['DomainCountry'] = full_df['SOURCEURL'].apply(url_domain)
     full_df['DomainCountry'] = full_df['DomainCountry'].\
         apply(key_in_dict, args=(SOURCE_DICT, ))
-    # full_df.dropna(subset=['DomainCountry'], inplace=True)
 
     # Expand all the codes
     full_df = match_columns(full_df)
-    full_df['ActionCountry'] = full_df['ActionGeo_CountryCode']\
-        .apply(country_name)
-    full_df.drop('ActionGeo_CountryCode', axis=1, inplace=True)
     full_df.set_index("GLOBALEVENTID", inplace=True)
 
     return full_df
@@ -392,11 +400,10 @@ def download_files(file_list):
                            filename=local_path + 'tmp/' + compressed_file)
 
         # extract the contents of the compressed file to a temporary directory
-        print 'extracting,\n',
         z = zipfile.ZipFile(file=local_path + 'tmp/' + compressed_file,
                             mode='r')
-        print z.namelist(),
         for name in z.namelist():
+            print 'extracting', name,
             z.extract(name, path=local_path + 'tmp/')
 
             # parse each of the csv files in the working directory,
@@ -411,7 +418,7 @@ def download_files(file_list):
                 df.to_csv(outfile_name)
 
             print 'removing tmp files',
-            # os.remove(local_path + 'tmp/' + name)
+            os.remove(local_path + 'tmp/' + name)
 
         os.remove(local_path + 'tmp/' + compressed_file)
         print 'done'
