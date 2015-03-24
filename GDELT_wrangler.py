@@ -17,7 +17,6 @@ import zipfile
 import glob
 import re
 
-#  This is the index: 'GLOBALEVENTID',
 COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
                 'Actor1Name', 'Actor1CountryCode',
                 'Actor1KnownGroupCode', 'Actor1EthnicCode',
@@ -118,18 +117,6 @@ def filelist(mindate):
 def key_in_dict(key, dictionary):
     if key in dictionary:
         return dictionary[key]
-
-
-def lookup_columns(map_key, key_col, val_col, lookup_df):
-    """DEPRECATED... too slow
-
-    If lookup_df has the map_key in column 'key_col', return the value
-    contained in column 'val_col' of the same row"""
-
-    if not lookup_df.loc[lookup_df[key_col] == map_key, key_col].empty:
-        ind = lookup_df.loc[lookup_df[key_col] == map_key, key_col].index[0]
-
-        return lookup_df.loc[ind, val_col]
 
 
 def match_columns(df):

@@ -34,22 +34,40 @@ TYPESDICT['Actor2Religion2'] = str
 TYPESDICT['ActionCountry'] = str
 TYPESDICT['EVENTDESCRIPTION'] = str
 
+COLUMNS = [u'GLOBALEVENTID', u'SQLDATE', u'Actor1Name', u'Actor2Name',
+           u'GoldsteinScale', u'NumSources', u'AvgTone', u'DATEADDED',
+           u'SOURCEURL', u'DomainCountry', u'Actor1Country', u'Actor2Country',
+           u'Actor1Type1', u'Actor2Type1',
+           u'Actor1KnownGroup', u'Actor2KnownGroup',
+           u'Actor1Ethnic', u'Actor2Ethnic',
+           u'Actor1Religion1', u'Actor2Religion1',
+           u'Actor1Type2', u'Actor2Type2', u'Actor1Type3', u'Actor2Type3',
+           u'Actor1Religion2', u'Actor2Religion2',
+           u'ActionCountry', u'EVENTDESCRIPTION']
 
-def load_csv(path, singlefile=None):
+COLUMNS_AVGTONE = [u'GLOBALEVENTID', u'ActionCountry', u'EVENTDESCRIPTION',
+                   u'AvgTone', u'DomainCountry', u'SOURCEURL']
+
+
+def load_csv(path, singlefile=None, columns=None):
     """Creates a DataFrame with all the csv files in the path directory"""
 
     if singlefile:
-        df = pd.read_csv(path + '/' + singlefile, dtype=TYPESDICT)
+        df = pd.read_csv(path + '/' + singlefile, dtype=TYPESDICT,
+                         usecols=columns)
         df.set_index('GLOBALEVENTID', inplace=True)
 
+        df.dropna(subset=['DomainCountry'], inplace=True)
         return df
 
     df = pd.DataFrame()
     csvs = listdir(path)
     for csvfile in csvs:
-        temp_df = pd.read_csv(path + '/' + csvfile, dtype=TYPESDICT)
+        temp_df = pd.read_csv(path + '/' + csvfile, dtype=TYPESDICT,
+                              usecols=columns)
         df = pd.concat([df, temp_df], join='inner')
         print csvfile, df.shape
+    df.dropna(subset=['DomainCountry'], inplace=True)
     df.set_index('GLOBALEVENTID', inplace=True)
 
     return df
