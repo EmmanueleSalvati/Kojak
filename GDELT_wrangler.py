@@ -19,20 +19,41 @@ import re
 
 #  This is the index: 'GLOBALEVENTID',
 COLUMN_NAMES = ['GLOBALEVENTID', 'SQLDATE',
-                'Actor1Code', 'Actor1Name', 'Actor1CountryCode',
+                'Actor1Name', 'Actor1CountryCode',
                 'Actor1KnownGroupCode', 'Actor1EthnicCode',
                 'Actor1Religion1Code', 'Actor1Religion2Code',
                 'Actor1Type1Code', 'Actor1Type2Code', 'Actor1Type3Code',
-                'Actor2Code', 'Actor2Name', 'Actor2CountryCode',
+                'Actor2Name', 'Actor2CountryCode',
                 'Actor2KnownGroupCode', 'Actor2EthnicCode',
                 'Actor2Religion1Code', 'Actor2Religion2Code',
                 'Actor2Type1Code', 'Actor2Type2Code', 'Actor2Type3Code',
                 'EventCode', 'GoldsteinScale', 'NumSources', 'AvgTone',
-                'Actor1Geo_ADM1Code', 'Actor1Geo_FeatureID',
-                'Actor2Geo_ADM1Code', 'Actor2Geo_FeatureID',
-                'ActionGeo_ADM1Code', 'ActionGeo_FeatureID',
+                # 'Actor1Geo_ADM1Code', 'Actor1Geo_FeatureID',
+                # 'Actor2Geo_ADM1Code', 'Actor2Geo_FeatureID',
+                # 'ActionGeo_ADM1Code', 'ActionGeo_FeatureID',
+                'ActionGeo_CountryCode',
                 'DATEADDED', 'SOURCEURL'
                 ]
+
+TYPESLIST = [str, str,
+             str, str,
+             str, str,
+             str, str,
+             str, str, str,
+             str, str,
+             str, str,
+             str, str,
+             str, str, str,
+             str, np.float64, np.int64, np.float64,
+             # str, str,
+             # str, str,
+             # str, str,
+             str,
+             str, str]
+
+TYPESDICT = {}
+for i in range(len(TYPESLIST)):
+    TYPESDICT[COLUMN_NAMES[i]] = TYPESLIST[i]
 
 gdelt_base_url = 'http://data.gdeltproject.org/events/'
 local_path = '/Users/JerkFace/Metis/Projects/Kojak/'
@@ -40,6 +61,18 @@ local_path = '/Users/JerkFace/Metis/Projects/Kojak/'
 # Load the table of countries' news
 SOURCE_DF = pd.read_table('DOMAINSBYCOUNTRY-ENGLISH.TXT')
 SOURCE_DF.drop(['FIPSCountryCode'], axis=1, inplace=True)
+SOURCE_DF.set_index('Domain', inplace=True)
+SOURCE_DICT = SOURCE_DF.to_dict()['CountryHumanName']
+
+CAMEO_DF = pd.read_table('CAMEO.eventcodes.txt', dtype=str)
+# CAMEO_DF.set_index('CAMEOEVENTCODE', inplace=True)
+# CAMEO_DICT = CAMEO_DF.to_dict()['EVENTDESCRIPTION']
+
+CAMEO_TYPE_DF = pd.read_table('CAMEO.type.txt', dtype=str)
+CAMEO_KNOWNGROUP_DF = pd.read_table('CAMEO.knowngroup.txt', dtype=str)
+CAMEO_ETHNIC_DF = pd.read_table('CAMEO.ethnic.txt', dtype=str)
+CAMEO_RELIGION_DF = pd.read_table('CAMEO.religion.txt', dtype=str)
+CAMEO_COUNTRY_DF = pd.read_table('CAMEO.country.txt', dtype=str)
 
 
 def url_domain(url):
@@ -87,6 +120,225 @@ def filelist(mindate):
     return file_list
 
 
+def key_in_dict(key, dictionary):
+    if key in dictionary:
+        return dictionary[key]
+
+
+def lookup_columns(map_key, key_col, val_col, lookup_df):
+    """DEPRECATED... too slow
+
+    If lookup_df has the map_key in column 'key_col', return the value
+    contained in column 'val_col' of the same row"""
+
+    if not lookup_df.loc[lookup_df[key_col] == map_key, key_col].empty:
+        ind = lookup_df.loc[lookup_df[key_col] == map_key, key_col].index[0]
+
+        return lookup_df.loc[ind, val_col]
+
+
+def match_columns(df):
+    """Match all the CAMEO and country codes in the df;
+    discard the useless columns
+
+    It is a long function, but it repeats the same thing over and over again,
+    on different columns"""
+
+    # Match country code of actors
+    countries1 = pd.merge(df, CAMEO_COUNTRY_DF, left_on='Actor1CountryCode',
+                          right_on='CODE', how='left', left_index=True)
+    countries1['Actor1Country'] = countries1['LABEL']
+    countries1.drop(['CODE', 'LABEL', 'Actor1CountryCode'],
+                    axis=1, inplace=True)
+    countries2 = pd.merge(countries1, CAMEO_COUNTRY_DF,
+                          left_on='Actor2CountryCode', right_on='CODE',
+                          how='left', left_index=True)
+    countries2['Actor2Country'] = countries2['LABEL']
+    countries2.drop(['CODE', 'LABEL', 'Actor2CountryCode'],
+                    axis=1, inplace=True)
+    del countries1, df
+
+    # Match type code of actors
+    type1 = pd.merge(countries2, CAMEO_TYPE_DF, left_on='Actor1Type1Code',
+                     right_on='CODE', how='left', left_index=True)
+    type1['Actor1Type1'] = type1['LABEL']
+    type1.drop(['CODE', 'LABEL', 'Actor1Type1Code'], axis=1, inplace=True)
+    type2 = pd.merge(type1, CAMEO_TYPE_DF, left_on='Actor2Type1Code',
+                     right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in type2:
+        type2['Actor2Type1'] = type2['LABEL']
+        type2.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        type2['Actor2Type1'] = np.nan
+    type2.drop('Actor2Type1Code', axis=1, inplace=True)
+    del countries2, type1
+
+    # Match group code of actors
+    group1 = pd.merge(type2, CAMEO_KNOWNGROUP_DF,
+                      left_on='Actor1KnownGroupCode',
+                      right_on='CODE', how='left', left_index=True)
+    group1['Actor1KnownGroup'] = group1['LABEL']
+    group1.drop(['CODE', 'LABEL', 'Actor1KnownGroupCode'], axis=1,
+                inplace=True)
+    group2 = pd.merge(group1, CAMEO_KNOWNGROUP_DF,
+                      left_on='Actor2KnownGroupCode',
+                      right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in group2:
+        group2['Actor2KnownGroup'] = group2['LABEL']
+        group2.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        group2['Actor2KnownGroup'] = np.nan
+    group2.drop('Actor2KnownGroupCode', axis=1,
+                inplace=True)
+    del type2, group1
+
+    # Match ethnic code of actors
+    ethnic1 = pd.merge(group2, CAMEO_ETHNIC_DF,
+                       left_on='Actor1EthnicCode',
+                       right_on='CODE', how='left', left_index=True)
+    ethnic1['Actor1Ethnic'] = ethnic1['LABEL']
+    ethnic1.drop(['CODE', 'LABEL', 'Actor1EthnicCode'], axis=1, inplace=True)
+    ethnic2 = pd.merge(ethnic1, CAMEO_ETHNIC_DF,
+                       left_on='Actor2EthnicCode',
+                       right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in ethnic2:
+        ethnic2['Actor2Ethnic'] = ethnic2['LABEL']
+        ethnic2.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        ethnic2['Actor2Ethnic'] = np.nan
+    ethnic2.drop('Actor2EthnicCode', axis=1, inplace=True)
+    del group2, ethnic1
+
+    # Match religion code of actors
+    religion1 = pd.merge(ethnic2, CAMEO_RELIGION_DF,
+                         left_on='Actor1Religion1Code',
+                         right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in religion1:
+        religion1['Actor1Religion1'] = religion1['LABEL']
+        religion1.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        religion1['Actor1Religion1'] = np.nan
+    religion1.drop('Actor1Religion1Code', axis=1,
+                   inplace=True)
+    religion2 = pd.merge(religion1, CAMEO_RELIGION_DF,
+                         left_on='Actor2Religion1Code',
+                         right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in religion2:
+        religion2['Actor2Religion1'] = religion2['LABEL']
+        religion2.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        religion2['Actor2Religion1'] = np.nan
+    religion2.drop('Actor2Religion1Code', axis=1,
+                   inplace=True)
+    del ethnic2, religion1
+
+    # Match Type2 code of actors
+    sectype1 = pd.merge(religion2, CAMEO_TYPE_DF, left_on='Actor1Type2Code',
+                        right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in sectype1:
+        sectype1['Actor1Type2'] = sectype1['LABEL']
+        sectype1.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        sectype1['Actor1Type2'] = np.nan
+    sectype1.drop('Actor1Type2Code', axis=1, inplace=True)
+    sectype2 = pd.merge(sectype1, CAMEO_TYPE_DF, left_on='Actor2Type2Code',
+                        right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in sectype2:
+        sectype2['Actor2Type2'] = sectype2['LABEL']
+        sectype2.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        sectype2['Actor2Type2'] = np.nan
+    sectype2.drop('Actor2Type2Code', axis=1, inplace=True)
+    del religion2, sectype1
+
+    # Match Type3 code of actors
+    thirdtype1 = pd.merge(sectype2, CAMEO_TYPE_DF, left_on='Actor1Type3Code',
+                          right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in thirdtype1:
+        thirdtype1['Actor1Type3'] = thirdtype1['LABEL']
+        thirdtype1.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        thirdtype1['Actor1Type3'] = np.nan
+    thirdtype1.drop('Actor1Type3Code', axis=1, inplace=True)
+    thirdtype2 = pd.merge(thirdtype1, CAMEO_TYPE_DF, left_on='Actor2Type3Code',
+                          right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in thirdtype2:
+        thirdtype2['Actor2Type3'] = thirdtype2['LABEL']
+        thirdtype2.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        thirdtype2['Actor2Type3'] = np.nan
+    thirdtype2.drop('Actor2Type3Code', axis=1, inplace=True)
+    del sectype2, thirdtype1
+
+    # Match Religion2 code of actors
+    secrel1 = pd.merge(thirdtype2, CAMEO_RELIGION_DF,
+                       left_on='Actor1Religion2Code',
+                       right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in secrel1:
+        secrel1['Actor1Religion2'] = secrel1['LABEL']
+        secrel1.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        secrel1['Actor1Religion2'] = np.nan
+    secrel1.drop('Actor1Religion2Code', axis=1, inplace=True)
+    secrel2 = pd.merge(secrel1, CAMEO_RELIGION_DF,
+                       left_on='Actor2Religion2Code',
+                       right_on='CODE', how='left', left_index=True)
+    if 'LABEL' in secrel2:
+        secrel2['Actor2Religion2'] = secrel2['LABEL']
+        secrel2.drop(['LABEL', 'CODE'], axis=1, inplace=True)
+    else:
+        secrel2['Actor2Religion2'] = np.nan
+    secrel2.drop('Actor2Religion2Code', axis=1, inplace=True)
+    del thirdtype2, secrel1
+
+    # # Match country code of actors
+    # countrycode = pd.merge(secrel2, CAMEO_COUNTRY_DF,
+    #                        left_on='ActionGeo_CountryCode',
+    #                        right_on='CODE', how='left', left_index=True)
+    # if 'LABEL' in countrycode:
+    #     countrycode['ActionCountry'] = countrycode['LABEL']
+    #     countrycode.drop(['CODE', 'LABEL', 'ActionGeo_CountryCode'],
+    #                      axis=1, inplace=True)
+    # else:
+    #     countrycode['ActionCountry'] = np.nan
+    # del secrel2
+
+    # Match Event Code
+    final = pd.merge(secrel2, CAMEO_DF, left_on='EventCode',
+                     right_on='CAMEOEVENTCODE', how='left', left_index=True)
+    if 'EVENTDESCRIPTION' in final:
+        final.drop(['EventCode', 'CAMEOEVENTCODE'], axis=1, inplace=True)
+    del secrel2
+
+    return final
+
+
+def country_name(code):
+    """Simple function to understand a country code"""
+
+    # codes_table = pd.read_table("countrynames.txt", sep='; ', header=None,
+    #                             skiprows=23, encoding='utf-8',
+    #                             usecols=[0, 1, 4])
+    wiki_codes = pd.read_csv('wikipedia-iso-country-codes.csv')
+
+    print 'code:', code
+    if not code:
+        return np.nan
+
+    if code == 'UK':
+        code = 'GB'
+
+    if len(code) == 3:
+        country = wiki_codes.loc[wiki_codes['Alpha-3 code'] == code,
+                                 'English short name (upper/lower case)']\
+                                 .iloc[0]
+    else:
+        country = wiki_codes.loc[wiki_codes['Alpha-2 code'] == code,
+                                 'English short name (upper/lower case)']\
+                                 .iloc[0]
+    return country
+
+
 def my_parser(in_file_name):
     """Load the infile, get the columns that I need, adds the Domain column,
     uses only the rows which have a URL from a source contained in SOURCE_DF,
@@ -96,11 +348,21 @@ def my_parser(in_file_name):
                              index_col='Column ID', parse_cols=1)['Field Name']
 
     with open(in_file_name, 'r') as infile:
-        full_df = pd.read_table(infile, names=colnames,  # index_col=0,
-                                usecols=COLUMN_NAMES)
-    full_df['Domain'] = full_df['SOURCEURL'].apply(url_domain)
-    full_df = pd.merge(full_df, SOURCE_DF,
-                       on='Domain', how='inner', left_index=True)
+        full_df = pd.read_table(infile, names=colnames,
+                                usecols=COLUMN_NAMES,
+                                dtype=TYPESDICT)
+
+    # Add country that produced the news
+    full_df['DomainCountry'] = full_df['SOURCEURL'].apply(url_domain)
+    full_df['DomainCountry'] = full_df['DomainCountry'].\
+        apply(key_in_dict, args=(SOURCE_DICT, ))
+    # full_df.dropna(subset=['DomainCountry'], inplace=True)
+
+    # Expand all the codes
+    full_df = match_columns(full_df)
+    full_df['ActionCountry'] = full_df['ActionGeo_CountryCode']\
+        .apply(country_name)
+    full_df.drop('ActionGeo_CountryCode', axis=1, inplace=True)
     full_df.set_index("GLOBALEVENTID", inplace=True)
 
     return full_df
@@ -149,7 +411,7 @@ def download_files(file_list):
                 df.to_csv(outfile_name)
 
             print 'removing tmp files',
-            os.remove(local_path + 'tmp/' + name)
+            # os.remove(local_path + 'tmp/' + name)
 
         os.remove(local_path + 'tmp/' + compressed_file)
         print 'done'

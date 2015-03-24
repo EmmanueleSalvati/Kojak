@@ -14,32 +14,54 @@ COLUMN_NAMES = ['SQLDATE',
                 'Actor2KnownGroupCode', 'Actor2EthnicCode',
                 'Actor2Religion1Code', 'Actor2Religion2Code',
                 'Actor2Type1Code', 'Actor2Type2Code', 'Actor2Type3Code',
+                ''
                 'EventCode', 'GoldsteinScale', 'NumSources', 'AvgTone',
-                'Actor1Geo_ADM1Code', 'Actor1Geo_FeatureID',
-                'Actor2Geo_ADM1Code', 'Actor2Geo_FeatureID',
-                'ActionGeo_ADM1Code', 'ActionGeo_FeatureID',
+                # 'Actor1Geo_ADM1Code', 'Actor1Geo_FeatureID',
+                # 'Actor2Geo_ADM1Code', 'Actor2Geo_FeatureID',
+                # 'ActionGeo_ADM1Code', 'ActionGeo_FeatureID',
+                'ActionCountry',
                 'DATEADDED', 'SOURCEURL'
                 ]
 
-TYPESLIST = [str,
-             str, str, str,
-             str, str,
-             str, str,
-             str, str, str,
-             str, str, str,
-             str, str,
-             str, str,
-             str, str, str,
-             np.int64, np.float64, np.int64, np.float64,
-             str, str,
-             str, str,
-             str, str,
-             str, str]
-
+# TYPESLIST = [str, str, str, str, str, str, str, str, str, str, str, str, str,
+#              str, str, str, str, str, str, str, str, str, np.float64,
+#              np.int64, np.float64, str, str, str, str, str, str, str, str]
 
 TYPESDICT = {}
-for i in range(len(TYPESLIST)):
-    TYPESDICT[COLUMN_NAMES[i]] = TYPESLIST[i]
+TYPESDICT['GLOBALEVENTID'] = str
+TYPESDICT['SQLDATE'] = str
+TYPESDICT['Actor1Name'] = str
+TYPESDICT['Actor2Name'] = str
+TYPESDICT['GoldsteinScale'] = np.float64
+TYPESDICT['NumSources'] = np.int64
+TYPESDICT['AvgTone'] = np.float64
+# TYPESDICT['Actor1Geo_ADM1Code'] = str
+# TYPESDICT['Actor1Geo_FeatureID'] = str
+# TYPESDICT['Actor2Geo_ADM1Code'] = str
+# TYPESDICT['Actor2Geo_FeatureID'] = str
+# TYPESDICT['ActionGeo_ADM1Code'] = str
+# TYPESDICT['ActionGeo_FeatureID'] = str
+TYPESDICT['DATEADDED'] = str
+TYPESDICT['SOURCEURL'] = str
+TYPESDICT['DomainCountry'] = str
+TYPESDICT['Actor1Country'] = str
+TYPESDICT['Actor2Country'] = str
+TYPESDICT['Actor1Type1'] = str
+TYPESDICT['Actor2Type1'] = str
+TYPESDICT['Actor1KnownGroup'] = str
+TYPESDICT['Actor2KnownGroup'] = str
+TYPESDICT['Actor1Ethnic'] = str
+TYPESDICT['Actor2Ethnic'] = str
+TYPESDICT['Actor1Religion1'] = str
+TYPESDICT['Actor2Religion1'] = str
+TYPESDICT['Actor1Type2'] = str
+TYPESDICT['Actor2Type2'] = str
+TYPESDICT['Actor1Type3'] = str
+TYPESDICT['Actor2Type3'] = str
+TYPESDICT['Actor1Religion2'] = str
+TYPESDICT['Actor2Religion2'] = str
+TYPESDICT['ActionCountry'] = str
+TYPESDICT['EVENTDESCRIPTION'] = str
 
 
 def load_csv(path, singlefile=None):
@@ -60,16 +82,3 @@ def load_csv(path, singlefile=None):
     df.set_index('GLOBALEVENTID', inplace=True)
 
     return df
-
-
-def country_codes():
-    countries = pd.read_table("countrynames.txt", sep='; ', header=None,
-                              skiprows=23, encoding='utf-8', usecols=[0, 4])
-
-    return countries
-
-
-def country_name(code):
-    codes_table = country_codes()
-
-    return codes_table.loc[codes_table[0] == code, 4].iloc[0]
