@@ -45,17 +45,19 @@ COLUMNS = [u'GLOBALEVENTID', u'SQLDATE', u'Actor1Name', u'Actor2Name',
            u'Actor1Religion2', u'Actor2Religion2',
            u'ActionCountry', u'EVENTDESCRIPTION']
 
-COLUMNS_AVGTONE = [u'GLOBALEVENTID', u'ActionCountry', u'EVENTDESCRIPTION',
+COLUMNS_AVGTONE = [u'ActionCountry', u'EVENTDESCRIPTION',
                    u'AvgTone', u'DomainCountry', u'SOURCEURL']
 
+COLUMNS_TFIDF = [u'EVENTDESCRIPTION', u'DomainCountry']
 
-def load_csv(path, singlefile=None, columns=None):
+
+def load_csv(path, singlefile=None, columns=COLUMNS):
     """Creates a DataFrame with all the csv files in the path directory"""
 
     if singlefile:
         df = pd.read_csv(path + '/' + singlefile, dtype=TYPESDICT,
                          usecols=columns)
-        df.set_index('GLOBALEVENTID', inplace=True)
+        # df.set_index('GLOBALEVENTID', inplace=True)
 
         df.dropna(subset=['DomainCountry'], inplace=True)
         return df
@@ -66,8 +68,9 @@ def load_csv(path, singlefile=None, columns=None):
         temp_df = pd.read_csv(path + '/' + csvfile, dtype=TYPESDICT,
                               usecols=columns)
         df = pd.concat([df, temp_df], join='inner')
-        print csvfile, df.shape
+        # print csvfile, df.shape
     df.dropna(subset=['DomainCountry'], inplace=True)
-    df.set_index('GLOBALEVENTID', inplace=True)
+    print 'Final shape', df.shape
+    # df.set_index('GLOBALEVENTID', inplace=True)
 
     return df

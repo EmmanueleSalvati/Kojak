@@ -67,12 +67,8 @@
 53                   ActionGeo_Lat
 54                  ActionGeo_Long
 
-### Project Design and To-Do
-
-
 ### Deliverables
-
-### Leads to look after
+Visualization of countries' happiness based on their news
 
 
 ### Questions and Problems to solve:
