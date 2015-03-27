@@ -50,63 +50,42 @@ def filter_by_country_event(df, country, event):
     return df.loc[cond1 & cond2, :]
 
 
-def event_tfidf(df, country, event):
-    """First restrict by continent,
-    then calculate tfidf for that continent,
-    returns a number"""
-
-    tf = filter_by_country_event(df, country, event)
-    idf1 = filter_by_event(df, event)
-    print 'tf:', len(tf), 'idf1:', len(idf1), 'idf2:', len(idf2)
-
-    if len(idf1) == 0 or len(idf2) == 0:
-        return np.nan
-    elif len(tf) == 0:
-        return 0
-    return float(len(tf)) / len(idf1) / len(idf2)
-
-
 def tf_idfs(df, continent):
     """For each country in the continent, create a dictionary of tf-idfs with
     all the 310 possible events
     supported continents so far: NORTH_AMERICA and WEST_EUROPE"""
 
     # idf 2
-    allevents_per_country = df.groupby('DomainCountry', sort=False).count().\
+    alltopics_per_country = df.groupby('DomainCountry', sort=False).count().\
         to_dict()['EVENTDESCRIPTION']
 
-    # idf 1
-    # events_dict_by_country {}
-    # for name, group in df.groupby('DomainCountry'):
-    #     events_dict_by_country[name] = group.groupby(by='EVENTDESCRIPTION').\
-    #         count().to_dict()['DomainCountry']
-    events_dict = df.groupby('EVENTDESCRIPTION').count().\
+    alltopics_world = df.groupby('EVENTDESCRIPTION').count().\
         to_dict()['DomainCountry']
 
-    tfidfs_list = []
+    tfidfs_dict = {}
     for country in continent:
+        print country
         # idf 2
-        allevents = allevents_per_country[country]
+        allevents = alltopics_per_country[country]
 
         country_dict = {}
         for event in EVENTS:
-            tf = len(filter_by_country_event(df, country, event))
 
-            if allevents == 0 or event not in events_dict:
-                print country, event, np.nan
+            tf = len(filter_by_country_event(df, country, event).index)
+
+            if event not in alltopics_world:
                 country_dict[event] = np.nan
             elif tf == 0:
-                print country, event, 0
                 country_dict[event] = 0
             else:
-                idf1 = events_dict[event]
-                print country, event, float(tf) / idf1 / allevents
-                country_dict[event] = float(tf) / idf1 / allevents
+                idf1 = alltopics_world[event]
+                tfidf = float(tf) / idf1 / allevents
+                country_dict[event] = tfidf
 
-            # event_tfidf(df, country, event, continent)
-        tfidfs_list.append(country_dict)
+        print country_dict
+        tfidfs_dict[country] = country_dict
 
-    return tfidfs_list
+    return tfidfs_dict
 
 if __name__ == '__main__':
     wtf = loader.load_csv("data", columns=loader.COLUMNS_AVGTONE)

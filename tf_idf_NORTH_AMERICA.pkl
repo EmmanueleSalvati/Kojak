@@ -1,0 +1,2181 @@
+(dp0
+S'Canada'
+p1
+(dp2
+S'Obstruct passage, block'
+p3
+F1.4594772041203854e-07
+sS'Reject request for policy change'
+p4
+I0
+sS'Consider policy option'
+p5
+F1.526359353143875e-07
+sS'Appeal for aid, not specified below'
+p6
+F1.9458271553435948e-07
+sS'Threaten to ban political parties or politicians'
+p7
+I0
+sS'Find guilty or liable (legally)'
+p8
+F1.8967434968963742e-07
+sS'Appeal for easing of popular dissent'
+p9
+Fnan
+sS'Protest violently, riot'
+p10
+F9.033480391784247e-08
+sS'Conduct hunger strike for leadership change'
+p11
+Fnan
+sS'DISAPPROVE'
+p12
+Fnan
+sS'Forgive'
+p13
+F1.12872187396162e-07
+sS'Appeal to others to engage in or accept mediation'
+p14
+F2.3598373038871557e-07
+sS'Appeal to others to meet or negotiate'
+p15
+F1.4064407999073846e-07
+sS'INVESTIGATE'
+p16
+Fnan
+sS'Engage in mass expulsion'
+p17
+F2.4900171477520894e-07
+sS'Defy norms, law'
+p18
+F2.0068833631773982e-07
+sS'Yield, not specified below '
+p19
+F1.4672272602187197e-07
+sS'DEMAND'
+p20
+Fnan
+sS'Reject request for change in leadership'
+p21
+I0
+sS'Retreat or surrender militarily'
+p22
+F1.4228975408616887e-07
+sS'Threaten to use military force, not specified below'
+p23
+F1.6716901801780087e-07
+sS'Express intent to provide economic aid'
+p24
+F1.308066813874171e-07
+sS'Express intent to cooperate militarily'
+p25
+F9.694466761914803e-08
+sS'Use conventional military force, not specified below'
+p26
+F1.4471293591795717e-07
+sS'Reject request for military aid'
+p27
+I0
+sS'Conduct hunger strike for policy change'
+p28
+Fnan
+sS'Demand de-escalation of military engagement106:[-5.0] Demand withdrawal'
+p29
+F1.0804584896364837e-07
+sS'Ease ban on political parties or politicians'
+p30
+I0
+sS'Demand policy change'
+p31
+I0
+sS'Threaten to impose state of emergency or martial law'
+p32
+Fnan
+sS'Investigate crime, corruption'
+p33
+F1.5066228083559074e-07
+sS'Make a visit'
+p34
+F1.4741114626449813e-07
+sS'Conduct hunger strike, not specified below'
+p35
+F6.059041726196751e-08
+sS'Obstruct passage to demand leadership change '
+p36
+Fnan
+sS'Appeal for economic cooperation'
+p37
+F1.556731123607226e-07
+sS'Threaten conventional attack  '
+p38
+F1.6783375315438615e-07
+sS'Reduce or stop economic assistance'
+p39
+F1.1504509606702693e-07
+sS'Demand ceasefire'
+p40
+F2.840175809154727e-07
+sS'Reduce or stop humanitarian assistance'
+p41
+I0
+sS'Demonstrate military or police power, not specified below'
+p42
+F1.3713748592343784e-07
+sS'Employ aerial weapons'
+p43
+F1.6188979486707485e-07
+sS'PROVIDE AID'
+p44
+Fnan
+sS'Appeal for judicial cooperation'
+p45
+F1.4497932798574622e-07
+sS'Appeal for de-escalation of military engagement'
+p46
+F9.931210776382093e-08
+sS'Threaten with administrative sanctions, not specified below'
+p47
+F2.596732168370036e-07
+sS'Express intent to engage in material cooperation,  not specified below'
+p48
+F1.1198355937270591e-07
+sS'Threaten to halt international involvement (non-mediation)'
+p49
+F1.1727177534574357e-07
+sS'Demand change in leadership'
+p50
+F1.5469893769012982e-07
+sS'Express intent to cooperate economically'
+p51
+F1.7371798684458375e-07
+sS'Threaten to boycott, embargo, or sanction'
+p52
+F1.637578844918041e-07
+sS'Conduct hunger strike for rights'
+p53
+Fnan
+sS'Express intent to ease economic sanctions, boycott, or embargo'
+p54
+Fnan
+sS'Criticize or denounce '
+p55
+F1.5695134057363936e-07
+sS'Threaten occupation '
+p56
+I0
+sS'Appeal for policy change'
+p57
+F1.0386928673480146e-07
+sS'Demand aid, protection, or peacekeeping'
+p58
+Fnan
+sS'Provide military aid'
+p59
+F1.3532460439880807e-07
+sS'Accede to demands for rights'
+p60
+F1.6964745629794347e-07
+sS'Express intent to release persons or property'
+p61
+F1.4900094441055738e-07
+sS'Expel or deport individuals'
+p62
+F1.9610860346801817e-07
+sS'Refuse to yield, not specified below'
+p63
+F1.275886184739606e-07
+sS'Mobilize or increase armed forces '
+p64
+F1.4342227779502115e-07
+sS'Receive deployment of peacekeepers'
+p65
+F2.993879441179571e-07
+sS'Appeal for military protection or peacekeeping'
+p66
+F1.3519160038167195e-07
+sS'Express intent to change leadership'
+p67
+F1.6389211226597772e-07
+sS'Use unconventional mass violence, not specified below'
+p68
+Fnan
+sS'Mobilize or increase police power'
+p69
+F9.714091188558355e-08
+sS'Reject, not specified below'
+p70
+F1.4347944036491883e-07
+sS'Express intent to meet or negotiate'
+p71
+F1.2541171993982368e-07
+sS'EXPRESS INTENT TO COOPERATE'
+p72
+Fnan
+sS'Demonstrate or rally'
+p73
+F1.329974570736283e-07
+sS'Demonstrate for rights'
+p74
+I0
+sS'Express intent to accept mediation'
+p75
+F1.3100630759344328e-07
+sS'Increase military alert status'
+p76
+F1.5231108198157214e-07
+sS'Appeal, not specified below'
+p77
+F1.547750563618369e-07
+sS'Appeal for easing of administrative sanctions'
+p78
+I0
+sS'Accuse, not specified below'
+p79
+F1.5569439751805313e-07
+sS'Accuse of war crimes'
+p80
+F1.1208915834690806e-07
+sS'Defend verbally'
+p81
+F1.1200282523393225e-07
+sS'Reject request for rights'
+p82
+F1.7527942136497745e-07
+sS'Express intent to change policy'
+p83
+Fnan
+sS'Express intent to ease administrative sanctions'
+p84
+I0
+sS'Impose restrictions on political freedoms  '
+p85
+F1.9416233925470268e-07
+sS'Confiscate property'
+p86
+F1.8763484055318973e-07
+sS'Expel or withdraw, not specified below'
+p87
+F1.904405609015711e-07
+sS'Increase police alert status'
+p88
+F1.1606051757221948e-07
+sS'Reject economic cooperation'
+p89
+I0
+sS'Threaten attack with WMD'
+p90
+Fnan
+sS'Appeal for military aid'
+p91
+F1.4249017618810156e-07
+sS'Accuse of aggression'
+p92
+F1.1222766514293649e-07
+sS'Reject request or demand for political reform, not specified below'
+p93
+I0
+sS'Reduce relations, not specified below'
+p94
+F1.328819805878444e-07
+sS'Sexually assault'
+p95
+F9.006955941502987e-08
+sS'Express accord'
+p96
+F1.1858674938122084e-07
+sS'PROTEST'
+p97
+Fnan
+sS'Threaten with violent repression'
+p98
+F4.752189589173923e-08
+sS'Bring lawsuit against '
+p99
+F7.845954557805171e-08
+sS'Engage in symbolic act'
+p100
+F1.6082393433833448e-07
+sS'Ease curfew'
+p101
+F7.419234766771533e-08
+sS'Reject request for change in institutions, regime'
+p102
+I0
+sS'Demand economic aid'
+p103
+F2.285124308165632e-07
+sS'Seize or damage property, not specified below'
+p104
+F1.2533213084081434e-07
+sS'Engage in ethnic cleansing'
+p105
+F6.716720620264297e-08
+sS'Threaten political dissent, protest'
+p106
+F2.2419187040099226e-07
+sS'Return, release, not specified below'
+p107
+F1.7948507319989276e-07
+sS'Ease military blockade'
+p108
+F5.959713173308281e-08
+sS'Discuss by telephone'
+p109
+F1.0800642450223396e-07
+sS'Demand economic cooperation'
+p110
+Fnan
+sS'Appeal to others to settle dispute'
+p111
+F1.1208915834690806e-07
+sS'Appeal for political reform, not specified below'
+p112
+F6.979000941169033e-08
+sS'Demand, not specified below'
+p113
+F1.5605710722270283e-07
+sS'Express intent to provide military aid'
+p114
+F1.1948445035226703e-07
+sS'Appeal for change in leadership'
+p115
+F1.5388042479229845e-07
+sS'Engage in political dissent, not specified below'
+p116
+F1.2576926710329406e-07
+sS'Express intent to cooperate on intelligence'
+p117
+F8.169494462287755e-08
+sS'Ease economic sanctions, boycott, embargo'
+p118
+F1.8481879575851637e-07
+sS'Praise or endorse'
+p119
+F1.5229558880096827e-07
+sS'Fight with small arms and light weapons'
+p120
+F1.1446298193195862e-07
+sS'Halt negotiations'
+p121
+F1.426621461919127e-07
+sS'Refuse to release persons or property'
+p122
+F2.3358671825623376e-07
+sS'Make empathetic comment'
+p123
+F2.072624919848905e-07
+sS'Accede to demands for change in leadership'
+p124
+F1.989220822878691e-07
+sS'Demand release of persons or property'
+p125
+F2.517920841859195e-07
+sS'Demonstrate for leadership change'
+p126
+I0
+sS'MAKE PUBLIC STATEMENT'
+p127
+Fnan
+sS'Appeal for easing of economic sanctions, boycott, or embargo'
+p128
+I0
+sS'Express intent to cooperate on judicial matters'
+p129
+F3.635425035718051e-06
+sS'Use tactics of violent repression  '
+p130
+F8.770369312411891e-08
+sS'Return, release property'
+p131
+F1.3215788270488743e-07
+sS'Make optimistic comment'
+p132
+F1.3370743201460674e-07
+sS'Appeal for military cooperation'
+p133
+I0
+sS'Demand military aid'
+p134
+Fnan
+sS'Make pessimistic comment'
+p135
+F1.8886330781678756e-07
+sS'EXHIBIT FORCE POSTURE'
+p136
+Fnan
+sS'Demand military cooperation'
+p137
+Fnan
+sS'Conduct strike or boycott for rights'
+p138
+Fnan
+sS'Reject request for economic aid'
+p139
+Fnan
+sS'Demand judicial cooperation'
+p140
+F3.054979021611807e-08
+sS'Reject request for military protection or peacekeeping'
+p141
+Fnan
+sS'Conduct hunger strike for change in institutions, regime '
+p142
+Fnan
+sS'ASSAULT'
+p143
+Fnan
+sS'Express intent to provide diplomatic cooperation such as policy support'
+p144
+F1.2095684037509225e-07
+sS'Express intent to yield, not specified below'
+p145
+F1.241205313183162e-07
+sS'REDUCE RELATIONS'
+p146
+Fnan
+sS'Demand information, investigation'
+p147
+F1.7294390655546723e-07
+sS'Allow delivery of humanitarian aid'
+p148
+F6.26797419951388e-08
+sS'Appeal for economic aid'
+p149
+F1.492196969311613e-07
+sS'Allow international involvement not specified below'
+p150
+F9.68501796390124e-08
+sS'Arrest, detain, or charge with legal action '
+p151
+F1.3929064460870496e-07
+sS'Conduct strike or boycott for leadership change  '
+p152
+I0
+sS'Apologize'
+p153
+F1.6858973168792327e-07
+sS'Obstruct passage to demand rights'
+p154
+Fnan
+sS'Accuse of human rights abuses'
+p155
+F5.832232677622542e-08
+sS'Reduce or stop aid, not specified below'
+p156
+F7.353351083593492e-08
+sS'Ease political dissent '
+p157
+F1.3417947075314605e-07
+sS'Abduct, hijack, or take hostage '
+p158
+F9.264608835822603e-08
+sS'Investigate human rights abuses'
+p159
+F2.0827955933801334e-07
+sS'Express intent to change institutions, regime'
+p160
+F6.214401770458207e-08
+sS'Expel or withdraw aid agencies'
+p161
+Fnan
+sS'Destroy property'
+p162
+F1.3917631025649038e-07
+sS'Engage in violent protest for  change in institutions, regime'
+p163
+Fnan
+sS'Appeal for target to allow international involvement (non-mediation)'
+p164
+I0
+sS'Give ultimatum'
+p165
+F1.142562154082816e-07
+sS'Halt mediation'
+p166
+I0
+sS'Appeal for rights'
+p167
+F5.307189833165038e-08
+sS'Threaten to halt mediation'
+p168
+Fnan
+sS'Mediate'
+p169
+F1.1309809095688312e-07
+sS'Engage in violent protest for policy change'
+p170
+Fnan
+sS'Acknowledge or claim responsibility'
+p171
+F1.3312711527654188e-07
+sS'Express intent to mediate'
+p172
+F1.1112652947609762e-07
+sS'Accuse of espionage, treason'
+p173
+F5.6803516183094544e-08
+sS'Demand rights'
+p174
+F1.3845857069629296e-07
+sS'Grant asylum'
+p175
+F2.650830755211079e-07
+sS'Refuse to de-escalate military engagement'
+p176
+F9.36526355805587e-08
+sS'Demand easing of economic sanctions, boycott, or embargo'
+p177
+I0
+sS'Use chemical, biological, or radiologicalweapons'
+p178
+Fnan
+sS'Engage in diplomatic cooperation, not specified below'
+p179
+F1.2713958473099016e-07
+sS'Torture'
+p180
+F1.5492266349666204e-07
+sS'Veto'
+p181
+F1.0287716438663241e-07
+sS'Reject proposal to meet, discuss, or negotiate'
+p182
+F1.4628681492285797e-07
+sS'Host a visit'
+p183
+F1.462499309118684e-07
+sS'Express intent to institute political reform, not specified below'
+p184
+F6.732268584663058e-08
+sS'Express intent to provide rights'
+p185
+Fnan
+sS'Appeal to yield'
+p186
+F1.5815799766521597e-07
+sS'Reduce or break diplomatic relations'
+p187
+F1.3592683682154507e-07
+sS'Obstruct passage to demand change in institutions, regime'
+p188
+Fnan
+sS'Expel or withdraw inspectors, observers'
+p189
+I0
+sS'Decline comment'
+p190
+F1.335293141130445e-07
+sS'CONSULT'
+p191
+Fnan
+sS'Rally opposition against'
+p192
+F1.0025917174439657e-07
+sS'Demobilize armed forces'
+p193
+F6.022541474834121e-08
+sS'Assassinate '
+p194
+F9.871683919866214e-08
+sS'Express intent to de-escalate military engagement '
+p195
+F1.8353602122071713e-07
+sS'Express intent to ease popular dissent'
+p196
+Fnan
+sS'Fight with artillery and tanks'
+p197
+F1.342750307888003e-07
+sS'Use weapons of mass destruction, not specified below'
+p198
+Fnan
+sS'Impose administrative sanctions, not specified below'
+p199
+F1.6663008843938694e-07
+sS'Express intent to provide matyerial aid, not specified below'
+p200
+F1.5449476857611355e-07
+sS'Carry out suicide bombing'
+p201
+F1.1844743224144025e-07
+sS'Carry out roadside bombing '
+p202
+I0
+sS'Disapprove, not specified below'
+p203
+F1.453750020847186e-07
+sS'Demand policy support'
+p204
+I0
+sS'Expel or withdraw peacekeepers'
+p205
+I0
+sS'Use unconventional violence, not specified below'
+p206
+F1.8265050204017642e-07
+sS'Provide humanitarian aid'
+p207
+F1.770472837411278e-07
+sS'Return, release person(s)'
+p208
+F1.9006338849020534e-07
+sS'Refuse to allow international involvement (non mediation)'
+p209
+I0
+sS'THREATEN'
+p210
+Fnan
+sS'Accede to demands for change in institutions, regime'
+p211
+F2.548195118493961e-08
+sS'Impose state of emergency or martial law'
+p212
+F1.3087530128584982e-07
+sS'FIGHT'
+p213
+Fnan
+sS'Declare truce, ceasefire'
+p214
+F1.5806195807469786e-07
+sS'Rally support on behalf of'
+p215
+F1.0660151031859744e-07
+sS'Attempt to assassinate'
+p216
+F8.630089105562139e-08
+sS'Threaten blockade'
+p217
+Fnan
+sS'Appeal for diplomatic cooperation, such as policy support'
+p218
+F1.23393301665715e-07
+sS'Share intelligence or information'
+p219
+F9.536571872307369e-08
+sS'Conduct suicide, car, or other non-military bombing, not spec below'
+p220
+F1.3486836833402509e-07
+sS'Violate ceasefire '
+p221
+F2.2933756066445646e-07
+sS'Investigate war crimes'
+p222
+F3.5641421918804423e-07
+sS'Impose embargo, boycott, or sanctions'
+p223
+F1.13972955811646e-07
+sS'Sign formal agreement'
+p224
+F1.1584396813787464e-07
+sS'Investigate, not specified below'
+p225
+F1.6592761396099906e-07
+sS'Ease administrative sanctions, not specified below'
+p226
+F1.0343091089704287e-07
+sS'Threaten unconventional violence '
+p227
+F1.2614486870925287e-07
+sS'Express intent allow international involvement (not mediation)'
+p228
+F1.652465925326387e-07
+sS'REJECT'
+p229
+Fnan
+sS'Receive inspectors'
+p230
+F7.846241084283563e-08
+sS'APPEAL'
+p231
+Fnan
+sS'Make statement, not specified below'
+p232
+F1.5530920089279217e-07
+sS'Express intent to cooperate, not specified below'
+p233
+F1.3057459939287904e-07
+sS'Engage in judicial cooperation'
+p234
+F4.214249692242992e-07
+sS'De-escalate military engagement'
+p235
+F7.704211996223684e-08
+sS'Carry out car bombing'
+p236
+F1.0301086287748905e-07
+sS'Demand mediation'
+p237
+F1.1947406220669652e-07
+sS'Use as human shield '
+p238
+F1.4838469533543065e-07
+sS'Appeal for humanitarian aid'
+p239
+F1.4871279858658694e-07
+sS'Ease restrictions on political freedoms'
+p240
+F6.609863701305547e-08
+sS'Reject request for humanitarian aid'
+p241
+Fnan
+sS'Demand that target allows international involvement (non-mediation)'
+p242
+Fnan
+sS'Accede to demands for change in policy'
+p243
+Fnan
+sS'Threaten to impose restrictions on political freedoms '
+p244
+Fnan
+sS'Reject plan, agreement to settle dispute'
+p245
+F1.0104250244033957e-07
+sS'Threaten, not specified below'
+p246
+F1.8411180081575955e-07
+sS'Engage in material cooperation, not specified below'
+p247
+F1.805854396155166e-07
+sS'Deny responsibility'
+p248
+F1.2759783527795853e-07
+sS'Complain officially '
+p249
+F1.7286731015324962e-07
+sS'Ban political parties or politicians'
+p250
+F5.46680456498955e-08
+sS'Threaten to impose curfew'
+p251
+Fnan
+sS'Express intent to provide military protection or peacekeeping'
+p252
+F8.309542938784116e-08
+sS'Demand easing of political dissent'
+p253
+Fnan
+sS'Grant diplomatic recognition'
+p254
+F5.657620108943165e-08
+sS'Express intent to settle dispute'
+p255
+F1.2745713272636993e-07
+sS'Demonstrate for change in institutions, regime'
+p256
+Fnan
+sS'Provide military protection or peacekeeping'
+p257
+F1.2365391277952556e-07
+sS'Conduct strike or boycott, not specified below'
+p258
+F1.881268899602348e-07
+sS'Physically assault, not specified below'
+p259
+F1.3041464811351572e-07
+sS'Engage in mass killings'
+p260
+F1.2177004441627184e-07
+sS'Cooperate militarily'
+p261
+F1.7913322284280308e-07
+sS'Detonate nuclear weapons'
+p262
+Fnan
+sS'Demand humanitarian aid'
+p263
+I0
+sS'Appeal for intelligence'
+p264
+F2.038101594875376e-07
+sS'Kill by physical assault'
+p265
+F1.3372816888881115e-07
+sS'Demonstrate for policy change'
+p266
+F3.366134292331529e-08
+sS'Coerce, not specified below '
+p267
+F1.341721014939878e-07
+sS'Reduce or stop military assistance'
+p268
+F2.673106643910332e-07
+sS'Refuse to ease popular dissent'
+p269
+Fnan
+sS'ENGAGE IN DIPLOMATIC COOPERATION'
+p270
+Fnan
+sS'Demand military protection or peacekeeping'
+p271
+I0
+sS'Impose curfew'
+p272
+F2.0436983984577152e-07
+sS'Demand meeting, negotiation'
+p273
+Fnan
+sS'Obstruct passage to demand policy change'
+p274
+Fnan
+sS'Express intent to provide humanitarian aid'
+p275
+F1.8615128194941826e-07
+sS'ENGAGE IN MATERIAL COOPERATION'
+p276
+Fnan
+sS'Impose blockade, restrict movement '
+p277
+F1.3638433405830327e-07
+sS'Engage in violent protest for rights'
+p278
+Fnan
+sS'Reject request or demand for material aid, not specified below'
+p279
+F1.588909543583064e-07
+sS'Appeal for release of persons or property'
+p280
+F3.2483321242454666e-07
+sS'Demand political reform, not specified below'
+p281
+Fnan
+sS'YIELD'
+p282
+Fnan
+sS'Threaten to halt negotiations'
+p283
+F2.496857854201958e-08
+sS'Conduct strike or boycott for policy change'
+p284
+Fnan
+sS'Threaten to reduce or break relations'
+p285
+F1.4059654834268706e-07
+sS'Threaten non-force, not specified below'
+p286
+F8.618464524331586e-08
+sS'Accuse of crime, corruption'
+p287
+F2.31154193022535e-07
+sS'Refuse to ease economic sanctions, boycott, or embargo'
+p288
+I0
+sS'Demand change in institutions, regime'
+p289
+F4.621303011505997e-08
+sS'Engage in violent protest for leadership change  '
+p290
+Fnan
+sS'Meet at a \xc3\x92hird\xc3\x93location'
+p291
+F1.0215243902017665e-07
+sS'Threaten to reduce or stop aid'
+p292
+F4.276970630256531e-08
+sS'Engage in negotiation'
+p293
+F1.237100582465415e-07
+sS'Refuse to ease administrative sanctions'
+p294
+F9.207626728019518e-08
+sS'Ease state of emergency or martial law'
+p295
+F3.635425035718051e-06
+sS'Provide aid, not specified below'
+p296
+F1.4958353886762595e-07
+sS'Reject military cooperation'
+p297
+I0
+sS'Reject material cooperation'
+p298
+F2.8852579648555957e-08
+sS'Reject mediation'
+p299
+Fnan
+sS'Demand easing of administrative sanctions'
+p300
+I0
+sS'Investigate military action'
+p301
+F2.0669640671306643e-07
+sS'Appeal for change in institutions, regime'
+p302
+I0
+sS'Provide economic aid'
+p303
+F1.4466281786778788e-07
+sS'Occupy territory'
+p304
+F1.4080804887340417e-07
+sS'Accede to requests or demands for political reform not specified below'
+p305
+F5.062874324404249e-08
+sS'Conduct strike or boycott for change in institutions, regime'
+p306
+Fnan
+sS'COERCE'
+p307
+Fnan
+sS'USE UNCONVENTIONAL MASS VIOLENCE'
+p308
+Fnan
+sS'Demand intelligence cooperation'
+p309
+F1.8653239329303239e-07
+sS'Cooperate economically'
+p310
+F1.4902711166703726e-07
+sS'Appeal for material cooperation, not specified below'
+p311
+F8.027752444803267e-08
+sS'Consult, not specified below'
+p312
+F1.532853615888501e-07
+ssS'United States'
+p313
+(dp314
+g3
+F1.4783030113431425e-07
+sg4
+F1.5401331753156696e-07
+sg5
+F1.4749968525316493e-07
+sg6
+F1.4575530903186377e-07
+sg7
+F1.5401331753156696e-07
+sg8
+F1.4597784009513738e-07
+sg9
+Fnan
+sg10
+F1.4985962502844287e-07
+sg11
+Fnan
+sg12
+Fnan
+sg13
+F1.4923153276991416e-07
+sg14
+F1.4401596183214944e-07
+sg15
+F1.4796783130476453e-07
+sg16
+Fnan
+sg17
+F1.4346446016639112e-07
+sg18
+F1.4549786893616654e-07
+sg19
+F1.476751417484941e-07
+sg20
+Fnan
+sg21
+F1.5401331753156696e-07
+sg22
+F1.4794552403225876e-07
+sg23
+F1.4685484442801559e-07
+sg24
+F1.4829005425719295e-07
+sg25
+F1.499062957307252e-07
+sg26
+F1.477603039479636e-07
+sg27
+F1.5401331753156696e-07
+sg28
+Fnan
+sg29
+F1.488974905506233e-07
+sg30
+F1.5401331753156696e-07
+sg31
+F1.5401331753156696e-07
+sg32
+Fnan
+sg33
+F1.4739417264916652e-07
+sg34
+F1.4768352296606514e-07
+sg35
+F1.5144642890604082e-07
+sg36
+Fnan
+sg37
+F1.474182888211472e-07
+sg38
+F1.4659396863402056e-07
+sg39
+F1.4913947836917561e-07
+sg40
+F1.419810270994133e-07
+sg41
+F1.5401331753156696e-07
+sg42
+F1.4798635534365792e-07
+sg43
+F1.4708130730251133e-07
+sg44
+Fnan
+sg45
+F1.4763955345012512e-07
+sg46
+F1.4980600008244303e-07
+sg47
+F1.4301236627931217e-07
+sg48
+F1.491876647328643e-07
+sg49
+F1.490451459982906e-07
+sg50
+F1.472547543952083e-07
+sg51
+F1.4649446589024598e-07
+sg52
+F1.470757807058207e-07
+sg53
+Fnan
+sg54
+Fnan
+sg55
+F1.472805772470603e-07
+sg56
+F1.5401331753156696e-07
+sg57
+F1.4961293703066504e-07
+sg58
+Fnan
+sg59
+F1.4817402756143428e-07
+sg60
+F1.4657218387755536e-07
+sg61
+F1.4761706728005172e-07
+sg62
+F1.4540853902487357e-07
+sg63
+F1.4860807709409971e-07
+sg64
+F1.478499912546547e-07
+sg65
+F1.4132986785249674e-07
+sg66
+F1.4828597982755332e-07
+sg67
+F1.4707009420022583e-07
+sg68
+Fnan
+sg69
+F1.4977327478171005e-07
+sg70
+F1.478716150056067e-07
+sg71
+F1.4863038554008647e-07
+sg72
+Fnan
+sg73
+F1.483106382650662e-07
+sg74
+F1.5401331753156696e-07
+sg75
+F1.4800078561592018e-07
+sg76
+F1.4756071988415842e-07
+sg77
+F1.4740605487398583e-07
+sg78
+F1.5401331753156696e-07
+sg79
+F1.4732817560927486e-07
+sg80
+F1.4922513371313953e-07
+sg81
+F1.492244281831314e-07
+sg82
+F1.4658767543629497e-07
+sg83
+Fnan
+sg84
+F1.5401331753156696e-07
+sg85
+F1.457278856115351e-07
+sg86
+F1.451327109158355e-07
+sg87
+F1.4582496288563533e-07
+sg88
+F1.4909646044605213e-07
+sg89
+F1.5401331753156696e-07
+sg90
+Fnan
+sg91
+F1.4797677860289327e-07
+sg92
+F1.4917926481131756e-07
+sg93
+F1.5401331753156696e-07
+sg94
+F1.482926600842235e-07
+sg95
+F1.501079249603059e-07
+sg96
+F1.489894376528614e-07
+sg97
+Fnan
+sg98
+F1.5099344856035975e-07
+sg99
+F1.506894104814225e-07
+sg100
+F1.4713194391038215e-07
+sg101
+F1.508701886023513e-07
+sg102
+F1.5401331753156696e-07
+sg103
+F1.4433248042958276e-07
+sg104
+F1.4856925088524056e-07
+sg105
+F1.5116780589126088e-07
+sg106
+F1.44422403561947e-07
+sg107
+F1.463394136778386e-07
+sg108
+F1.514885090474429e-07
+sg109
+F1.494125279285182e-07
+sg110
+Fnan
+sg111
+F1.4918556194604508e-07
+sg112
+F1.510566918895997e-07
+sg113
+F1.473384735057173e-07
+sg114
+F1.4885766782722355e-07
+sg115
+F1.4749423530800857e-07
+sg116
+F1.4847538293222976e-07
+sg117
+F1.5055234410389128e-07
+sg118
+F1.4601695274896531e-07
+sg119
+F1.4750957105655619e-07
+sg120
+F1.4907497315231305e-07
+sg121
+F1.4796949316293984e-07
+sg122
+F1.441175102857855e-07
+sg123
+F1.452203410562202e-07
+sg124
+F1.4550435895024736e-07
+sg125
+F1.431065378464521e-07
+sg126
+F1.5401331753156696e-07
+sg127
+Fnan
+sg128
+F1.5401331753156696e-07
+sg129
+I0
+sg130
+F1.5016185180924179e-07
+sg131
+F1.4832271819488212e-07
+sg132
+F1.4829215581917654e-07
+sg133
+F1.5401331753156696e-07
+sg134
+Fnan
+sg135
+F1.4594247006040677e-07
+sg136
+Fnan
+sg137
+Fnan
+sg138
+Fnan
+sg139
+Fnan
+sg140
+F1.5271908797247816e-07
+sg141
+Fnan
+sg142
+Fnan
+sg143
+Fnan
+sg144
+F1.4831966438807094e-07
+sg145
+F1.4864429981348538e-07
+sg146
+Fnan
+sg147
+F1.4668661858061034e-07
+sg148
+F1.513579155051606e-07
+sg149
+F1.4769168516681545e-07
+sg150
+F1.4991029867595015e-07
+sg151
+F1.4800332510886633e-07
+sg152
+F1.5401331753156696e-07
+sg153
+F1.467496836647997e-07
+sg154
+Fnan
+sg155
+F1.5071891501752275e-07
+sg156
+F1.5067015721021079e-07
+sg157
+F1.4832885829164754e-07
+sg158
+F1.49906401239172e-07
+sg159
+F1.4518963788132095e-07
+sg160
+F1.5138061124897606e-07
+sg161
+Fnan
+sg162
+F1.4804986156910876e-07
+sg163
+Fnan
+sg164
+F1.5401331753156696e-07
+sg165
+F1.4917289898057485e-07
+sg166
+F1.5401331753156696e-07
+sg167
+F1.51764947932566e-07
+sg168
+Fnan
+sg169
+F1.491836316159429e-07
+sg170
+Fnan
+sg171
+F1.483158911461262e-07
+sg172
+F1.4930548686466316e-07
+sg173
+F1.5160685944513623e-07
+sg174
+F1.4792197050028915e-07
+sg175
+F1.4250006707883954e-07
+sg176
+F1.5004576134222916e-07
+sg177
+F1.5401331753156696e-07
+sg178
+Fnan
+sg179
+F1.4849315841957313e-07
+sg180
+F1.471234043677946e-07
+sg181
+F1.4965496789438454e-07
+sg182
+F1.4781593553192804e-07
+sg183
+F1.4772879748133544e-07
+sg184
+F1.5116121905876017e-07
+sg185
+Fnan
+sg186
+F1.4723815397020746e-07
+sg187
+F1.4794073261189945e-07
+sg188
+Fnan
+sg189
+F1.5401331753156696e-07
+sg190
+F1.4826863594721592e-07
+sg191
+Fnan
+sg192
+F1.4959132579284422e-07
+sg193
+F1.507660487884315e-07
+sg194
+F1.4957154557329564e-07
+sg195
+F1.4623788790861407e-07
+sg196
+Fnan
+sg197
+F1.4826429389089942e-07
+sg198
+Fnan
+sg199
+F1.4684570606186425e-07
+sg200
+F1.4739706639569193e-07
+sg201
+F1.489401971545873e-07
+sg202
+F1.5401331753156696e-07
+sg203
+F1.4781547375686282e-07
+sg204
+F1.5401331753156696e-07
+sg205
+F1.5401331753156696e-07
+sg206
+F1.4615608910334478e-07
+sg207
+F1.4643249968300299e-07
+sg208
+F1.458538199397776e-07
+sg209
+F1.5401331753156696e-07
+sg210
+Fnan
+sg211
+F1.5293378493204662e-07
+sg212
+F1.4846883810043055e-07
+sg213
+Fnan
+sg214
+F1.472736043137824e-07
+sg215
+F1.494307738016497e-07
+sg216
+F1.5035721503823598e-07
+sg217
+Fnan
+sg218
+F1.4861596318601763e-07
+sg219
+F1.498843931930153e-07
+sg220
+F1.4829967342307557e-07
+sg221
+F1.44297524135884e-07
+sg222
+F1.3891397267553098e-07
+sg223
+F1.4915182780059415e-07
+sg224
+F1.4896526361649815e-07
+sg225
+F1.4691210931430524e-07
+sg226
+F1.4957797869500744e-07
+sg227
+F1.4866924097143547e-07
+sg228
+F1.47012712189223e-07
+sg229
+Fnan
+sg230
+F1.5068928909563385e-07
+sg231
+Fnan
+sg232
+F1.4736058899809887e-07
+sg233
+F1.483943046129422e-07
+sg234
+F1.3565791283506734e-07
+sg235
+F1.5074945914679202e-07
+sg236
+F1.4964930381166425e-07
+sg237
+F1.4895184700236052e-07
+sg238
+F1.4772705967313564e-07
+sg239
+F1.4711719883612365e-07
+sg240
+F1.5121307539462937e-07
+sg241
+Fnan
+sg242
+Fnan
+sg243
+Fnan
+sg244
+Fnan
+sg245
+F1.496435129229701e-07
+sg246
+F1.461531811156729e-07
+sg247
+F1.4627784834288154e-07
+sg248
+F1.4857140722587228e-07
+sg249
+F1.4663349316012512e-07
+sg250
+F1.5111833035992095e-07
+sg251
+Fnan
+sg252
+F1.504930131308454e-07
+sg253
+Fnan
+sg254
+F1.510001623642086e-07
+sg255
+F1.48531834251559e-07
+sg256
+Fnan
+sg257
+F1.4864380561082357e-07
+sg258
+F1.4598954679303427e-07
+sg259
+F1.4833012062607846e-07
+sg260
+F1.488545786407203e-07
+sg261
+F1.4629056753454652e-07
+sg262
+Fnan
+sg263
+F1.5401331753156696e-07
+sg264
+F1.453789822060103e-07
+sg265
+F1.4834797751337579e-07
+sg266
+F1.5258726829516354e-07
+sg267
+F1.4832917048734394e-07
+sg268
+F1.4268880888953998e-07
+sg269
+Fnan
+sg270
+Fnan
+sg271
+F1.5401331753156696e-07
+sg272
+F1.450222698053998e-07
+sg273
+Fnan
+sg274
+Fnan
+sg275
+F1.4566319790636152e-07
+sg276
+Fnan
+sg277
+F1.481880905769597e-07
+sg278
+Fnan
+sg279
+F1.4721465272794445e-07
+sg280
+F1.3990785360276374e-07
+sg281
+Fnan
+sg282
+Fnan
+sg283
+F1.5295553375731168e-07
+sg284
+Fnan
+sg285
+F1.480570013839373e-07
+sg286
+F1.5031472185192957e-07
+sg287
+F1.4405364128946056e-07
+sg288
+F1.5401331753156696e-07
+sg289
+F1.5205552112226738e-07
+sg290
+Fnan
+sg291
+F1.4956817791558913e-07
+sg292
+F1.5220139614884265e-07
+sg293
+F1.486771011580098e-07
+sg294
+F1.501125435504181e-07
+sg295
+I0
+sg296
+F1.4761640701384736e-07
+sg297
+F1.5401331753156696e-07
+sg298
+F1.5279098961464977e-07
+sg299
+Fnan
+sg300
+F1.5401331753156696e-07
+sg301
+F1.4525670750468858e-07
+sg302
+F1.5401331753156696e-07
+sg303
+F1.4782703965730633e-07
+sg304
+F1.4791958307885052e-07
+sg305
+F1.518088715939778e-07
+sg306
+Fnan
+sg307
+Fnan
+sg308
+Fnan
+sg309
+F1.4588990250568238e-07
+sg310
+F1.4755063336266741e-07
+sg311
+F1.5022371539672083e-07
+sg312
+F1.4744287872148566e-07
+ssS'Mexico'
+p315
+(dp316
+g3
+I0
+sg4
+I0
+sg5
+F8.507116713557893e-08
+sg6
+F2.6256334078032984e-08
+sg7
+I0
+sg8
+I0
+sg9
+Fnan
+sg10
+F5.879191023315192e-07
+sg11
+Fnan
+sg12
+Fnan
+sg13
+I0
+sg14
+I0
+sg15
+F1.5684640846820032e-07
+sg16
+Fnan
+sg17
+I0
+sg18
+F2.405710116549919e-08
+sg19
+F2.2013852279976922e-07
+sg20
+Fnan
+sg21
+I0
+sg22
+F7.152564194263644e-08
+sg23
+F1.3753414361523106e-07
+sg24
+F3.2697034509758106e-07
+sg25
+I0
+sg26
+F2.2010567813221048e-07
+sg27
+I0
+sg28
+Fnan
+sg29
+F9.690974214255811e-07
+sg30
+I0
+sg31
+I0
+sg32
+Fnan
+sg33
+F4.2542112437101484e-07
+sg34
+F1.5257110891916685e-07
+sg35
+I0
+sg36
+Fnan
+sg37
+I0
+sg38
+F5.563265004570779e-07
+sg39
+I0
+sg40
+I0
+sg41
+I0
+sg42
+F3.9085050241877833e-07
+sg43
+F1.324759957911493e-07
+sg44
+Fnan
+sg45
+F4.1709836347286105e-07
+sg46
+I0
+sg47
+I0
+sg48
+F1.4669305733445337e-07
+sg49
+I0
+sg50
+F3.6856630655281406e-07
+sg51
+F2.867820983731425e-07
+sg52
+I0
+sg53
+Fnan
+sg54
+Fnan
+sg55
+F1.503742138731917e-07
+sg56
+I0
+sg57
+I0
+sg58
+Fnan
+sg59
+F1.913288133422e-07
+sg60
+F4.5725501713269225e-07
+sg61
+F1.509596201131352e-07
+sg62
+F5.339700434010851e-07
+sg63
+I0
+sg64
+F1.5710342508089568e-07
+sg65
+I0
+sg66
+I0
+sg67
+I0
+sg68
+Fnan
+sg69
+F2.244225607511872e-07
+sg70
+F1.1383136552176129e-07
+sg71
+F1.2581877601331362e-07
+sg72
+Fnan
+sg73
+F1.229044665547941e-07
+sg74
+I0
+sg75
+F8.323179054886372e-07
+sg76
+I0
+sg77
+F9.04832338473432e-08
+sg78
+I0
+sg79
+F1.6054467820078912e-07
+sg80
+F7.12132226432981e-08
+sg81
+F7.906485880123126e-08
+sg82
+I0
+sg83
+Fnan
+sg84
+I0
+sg85
+F1.0765657895813409e-07
+sg86
+F1.6763822330305414e-06
+sg87
+F2.1670200354004392e-07
+sg88
+I0
+sg89
+I0
+sg90
+Fnan
+sg91
+I0
+sg92
+F1.4319910231346742e-07
+sg93
+I0
+sg94
+F1.6406177582106766e-07
+sg95
+F1.6130138324692494e-07
+sg96
+I0
+sg97
+Fnan
+sg98
+F1.8115154413576221e-06
+sg99
+I0
+sg100
+F1.2261086597111975e-07
+sg101
+I0
+sg102
+I0
+sg103
+I0
+sg104
+F2.4190430942851077e-07
+sg105
+I0
+sg106
+F1.6757065449075948e-07
+sg107
+F1.2613555636880287e-07
+sg108
+I0
+sg109
+F4.524352963234022e-08
+sg110
+Fnan
+sg111
+F1.424264452865962e-07
+sg112
+I0
+sg113
+F1.1435992310540424e-07
+sg114
+F1.6869255175150102e-07
+sg115
+I0
+sg116
+F3.7750185579912306e-07
+sg117
+I0
+sg118
+F2.9979649813706457e-07
+sg119
+F9.322845042066131e-08
+sg120
+F1.6046328784616766e-07
+sg121
+I0
+sg122
+I0
+sg123
+F2.228705874298136e-08
+sg124
+F1.470354708369847e-07
+sg125
+F4.3138033078243765e-07
+sg126
+I0
+sg127
+Fnan
+sg128
+I0
+sg129
+I0
+sg130
+F2.446265335637389e-07
+sg131
+F1.6517393476025995e-07
+sg132
+F1.0203750082230221e-07
+sg133
+I0
+sg134
+Fnan
+sg135
+F1.2548497482279306e-07
+sg136
+Fnan
+sg137
+Fnan
+sg138
+Fnan
+sg139
+Fnan
+sg140
+I0
+sg141
+Fnan
+sg142
+Fnan
+sg143
+Fnan
+sg144
+F1.0246279575885996e-06
+sg145
+F1.992178706398679e-07
+sg146
+Fnan
+sg147
+I0
+sg148
+I0
+sg149
+I0
+sg150
+I0
+sg151
+F1.961566928633427e-07
+sg152
+I0
+sg153
+F2.1846704876068014e-07
+sg154
+Fnan
+sg155
+F1.482148997474418e-06
+sg156
+F4.102050259413658e-07
+sg157
+I0
+sg158
+F3.275303313023415e-07
+sg159
+I0
+sg160
+I0
+sg161
+Fnan
+sg162
+F1.211265896895884e-07
+sg163
+Fnan
+sg164
+I0
+sg165
+I0
+sg166
+I0
+sg167
+I0
+sg168
+Fnan
+sg169
+F6.898005538270686e-08
+sg170
+Fnan
+sg171
+F1.0356636252272063e-07
+sg172
+I0
+sg173
+I0
+sg174
+F4.0599882206208426e-07
+sg175
+F5.094887178818312e-07
+sg176
+I0
+sg177
+I0
+sg178
+Fnan
+sg179
+F2.410412399907427e-07
+sg180
+F5.878867118790741e-07
+sg181
+I0
+sg182
+I0
+sg183
+F1.5962535800775295e-07
+sg184
+I0
+sg185
+Fnan
+sg186
+F1.3472444405284538e-07
+sg187
+F5.652519290164165e-07
+sg188
+Fnan
+sg189
+I0
+sg190
+F1.579433501427176e-07
+sg191
+Fnan
+sg192
+F3.141237580593686e-07
+sg193
+F1.2522373306975127e-06
+sg194
+F4.673063615251227e-07
+sg195
+I0
+sg196
+Fnan
+sg197
+F1.0890446464743269e-07
+sg198
+Fnan
+sg199
+F1.9506707234982445e-07
+sg200
+F1.2802778393124017e-07
+sg201
+F9.923446563828006e-08
+sg202
+I0
+sg203
+F7.034688173522877e-08
+sg204
+I0
+sg205
+I0
+sg206
+F2.1471612810135976e-07
+sg207
+F1.444733813161079e-07
+sg208
+F1.9352626267500257e-07
+sg209
+I0
+sg210
+Fnan
+sg211
+I0
+sg212
+I0
+sg213
+Fnan
+sg214
+F7.825010235113387e-08
+sg215
+F1.195178363638276e-07
+sg216
+I0
+sg217
+Fnan
+sg218
+F3.056557729137907e-07
+sg219
+F1.597935212036415e-07
+sg220
+I0
+sg221
+I0
+sg222
+I0
+sg223
+F5.951510898168696e-08
+sg224
+F2.526109390030947e-07
+sg225
+F1.2912408214033408e-07
+sg226
+F9.633232560546243e-08
+sg227
+I0
+sg228
+I0
+sg229
+Fnan
+sg230
+I0
+sg231
+Fnan
+sg232
+F1.3158072864679246e-07
+sg233
+F1.570554892797499e-07
+sg234
+F9.032276711797083e-07
+sg235
+I0
+sg236
+I0
+sg237
+I0
+sg238
+I0
+sg239
+F1.0724892414007814e-06
+sg240
+I0
+sg241
+Fnan
+sg242
+Fnan
+sg243
+Fnan
+sg244
+Fnan
+sg245
+F1.6048747106410895e-07
+sg246
+F1.0854109720218216e-07
+sg247
+F1.530372868207599e-07
+sg248
+F6.528829325537458e-08
+sg249
+F1.0144398067262228e-07
+sg250
+F1.0419618892019406e-06
+sg251
+Fnan
+sg252
+I0
+sg253
+Fnan
+sg254
+F1.1091404014003762e-06
+sg255
+F1.4723073706651588e-07
+sg256
+Fnan
+sg257
+F2.356818558909151e-07
+sg258
+F9.690974214255811e-08
+sg259
+F2.8475533821340703e-07
+sg260
+I0
+sg261
+F2.4086370255298184e-07
+sg262
+Fnan
+sg263
+I0
+sg264
+I0
+sg265
+I0
+sg266
+I0
+sg267
+I0
+sg268
+I0
+sg269
+Fnan
+sg270
+Fnan
+sg271
+I0
+sg272
+F5.992688919518188e-07
+sg273
+Fnan
+sg274
+Fnan
+sg275
+F8.348248871316753e-07
+sg276
+Fnan
+sg277
+F8.522812500852281e-08
+sg278
+Fnan
+sg279
+F1.2113717767819764e-07
+sg280
+F6.191255305905797e-07
+sg281
+Fnan
+sg282
+Fnan
+sg283
+I0
+sg284
+Fnan
+sg285
+I0
+sg286
+F8.53330857536072e-08
+sg287
+F3.0039219204593514e-07
+sg288
+I0
+sg289
+I0
+sg290
+Fnan
+sg291
+F2.1143943740194497e-07
+sg292
+I0
+sg293
+F1.7148281310186665e-07
+sg294
+I0
+sg295
+I0
+sg296
+F1.0773130310922391e-07
+sg297
+I0
+sg298
+I0
+sg299
+Fnan
+sg300
+I0
+sg301
+I0
+sg302
+I0
+sg303
+F1.0382927344261489e-07
+sg304
+F2.3117290311439603e-07
+sg305
+F1.0721928917900046e-07
+sg306
+Fnan
+sg307
+Fnan
+sg308
+Fnan
+sg309
+F3.9779241123461243e-07
+sg310
+F2.6851891010859575e-07
+sg311
+F6.99462113634615e-07
+sg312
+F1.377882821831079e-07
+ss.
