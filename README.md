@@ -1,9 +1,14 @@
 # Kojak
 
 ## Possible questions:
-1. How would the news report such-and-such, if it happened somewhere else?
-2. What topics are Italians expressing in their news mostly?
-3. Given one type of news, who would talk about it the most?
+1. What topics are Italians expressing in their news mostly?
+2. Given one type of news, who would talk about it the most?
+
+## How to create the GeoJSON and topojson files
+    cd maps/
+    ogr2ogr -f GeoJSON -where "ADM0_A3 IN ('CAN', 'MEX', 'USA')" northamerica_subunits.json ne_10m_admin_0_map_subunits/ne_10m_admin_0_map_subunits.shp
+    ogr2ogr -f GeoJSON -where "ISO_A2 IN ('CA', 'MX', 'US') AND SCALERANK < 8" northamerica_places.json ne_10m_populated_places/ne_10m_populated_places.shp
+    topojson -o northamerica.json --id-property SU_A3 --properties name=NAME -- northamerica_subunits.json northamerica_places.json
 
 ### Columns to keep
 0   GLOBALEVENTID
