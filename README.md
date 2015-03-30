@@ -75,5 +75,10 @@
 ### Deliverables
 Visualization of countries' happiness based on their news
 
-
-### Questions and Problems to solve:
+### Workflow
+    import GDELT_loader as loader
+    wtf = loader.load_csv("data", columns=loader.COLUMNS_TFIDF)
+    wtf = funcs.filter_by_continent(wtf, funcs.NORTH_AMERICA)
+    wtf.head()
+    tot_counts = wtf.groupby(by='DomainCountry').count()
+    tot_counts.to_csv("tot_events_northamerica.csv")

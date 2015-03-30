@@ -3,6 +3,8 @@
 import pandas as pd
 import GDELT_loader as loader
 import numpy as np
+import math
+from collections import OrderedDict
 pd.set_option('display.multi_sparse', False)
 
 WEST_EUROPE = ('Belgium', 'Denmark', 'Finland', 'France', 'Germany', 'Greece',
@@ -86,6 +88,19 @@ def tf_idfs(df, continent):
         tfidfs_dict[country] = country_dict
 
     return tfidfs_dict
+
+
+def tfidf_sort_dict(country_dict):
+    """Takes a dictionary {'event1': count1, 'event2': count2} for a given
+    country, gets rid of nan's and returns a dict sorted by count value"""
+
+    sorted_dict = {}
+    for k, v in country_dict.iteritems():
+        if not math.isnan(v):
+            sorted_dict[k] = country_dict[k]
+    return OrderedDict(sorted(sorted_dict.items(),
+                       key=lambda x: x[1], reverse=True))
+
 
 if __name__ == '__main__':
     wtf = loader.load_csv("data", columns=loader.COLUMNS_AVGTONE)

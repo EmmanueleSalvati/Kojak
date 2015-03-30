@@ -2,10 +2,6 @@
 <meta charset="utf-8">
 <style type="text/css">
 
-.place {
-    fill: #444;
-}
-
 .subunit-label {
     fill: #777;
     fill-opacity: .5;
@@ -86,7 +82,6 @@
                     var value = d.properties.value;
 
                     if (value) {
-                        console.log(color(value));
                         return color(value);
                     } else {
                         return "#ccc";
