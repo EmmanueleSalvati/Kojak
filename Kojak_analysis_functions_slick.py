@@ -2,14 +2,18 @@
 
 import pandas as pd
 import numpy as np
+import GDELT_loader as loader
+import os
+from math import log10, floor
+
 pd.set_option('display.multi_sparse', False)
 
 WEST_EUROPE = ('Belgium', 'Denmark', 'Finland', 'France', 'Germany', 'Greece',
                'Italy', 'Luxembourg', 'Netherlands', 'Norway', 'Portugal',
                'Spain', 'Sweden', 'United Kingdom')
 
-# NORTH_AMERICA = ('Canada', 'Mexico', 'United States')
-NORTH_AMERICA = ('Canada', 'United States')
+NORTH_AMERICA = ('Canada', 'Mexico', 'United States')
+# NORTH_AMERICA = ('Canada', 'United States')
 
 CONTINENTS = {}
 for country in WEST_EUROPE:
@@ -92,11 +96,45 @@ def tfids_df(finaldf):
 
     all_counts = finaldf.sum()
     tfidfs = pd.DataFrame()
+    print 'world:', all_counts['world']
+
     for country in finaldf.columns[1:]:
-        print 'world:', all_counts['world']
         print country, all_counts[country]
         tfidfs[country] = (finaldf[country] * all_counts['world']) /\
             (finaldf['world'] * all_counts[country])
 
     return tfidfs
+
+
+def round_sig(x, sig=2):
+    return round(x, sig-int(floor(log10(x)))-1)
+
+
+def tfs_to_tsv(tfs_df):
+    """Sorts the tfs and writes out a tsv per country"""
+
+    for country in tfs_df.columns:
+        tmp = tfs_df[country].order(ascending=False)
+        tmp.dropna(inplace=True)
+        if country == "United States":
+            tmp = tmp.apply(round_sig, args=(5,))
+        else:
+            tmp = tmp.apply(round_sig)
+        tsv_name = str(country + '.tsv')
+        tsv_name = tsv_name.replace(" ", "")
+        os.system('echo "Event\tvalue" > %s' % tsv_name)
+        tmp.to_csv(('tmp_%s' % tsv_name), sep='\t')
+        os.system('cat tmp_%s >> %s' % (tsv_name, tsv_name))
+        os.system('rm -f tmp_%s' % tsv_name)
+
+if __name__ == '__main__':
+    big_df = loader.load_csv("data", columns=loader.COLUMNS_TFIDF)
+    world = filter_by_continent(big_df, NORTH_AMERICA)
+    dfs = split_df_by_country(world, NORTH_AMERICA)
+    tfs = tfids_df(final_df)
+    tfs_to_tsv(tfs)
+
+
+
+
 
