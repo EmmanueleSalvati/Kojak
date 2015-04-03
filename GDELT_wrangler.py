@@ -57,16 +57,17 @@ SOURCE_DF.drop(['FIPSCountryCode'], axis=1, inplace=True)
 SOURCE_DF.set_index('Domain', inplace=True)
 SOURCE_DICT = SOURCE_DF.to_dict()['CountryHumanName']
 
-CAMEO_DF = pd.read_table('CAMEO.eventcodes.txt', dtype=str)
+CAMEO_DF = pd.read_table('eventcodes/CAMEO.eventcodes.txt', dtype=str)
 
-CAMEO_TYPE_DF = pd.read_table('CAMEO.type.txt', dtype=str)
-CAMEO_KNOWNGROUP_DF = pd.read_table('CAMEO.knowngroup.txt', dtype=str)
-CAMEO_ETHNIC_DF = pd.read_table('CAMEO.ethnic.txt', dtype=str)
-CAMEO_RELIGION_DF = pd.read_table('CAMEO.religion.txt', dtype=str)
-CAMEO_COUNTRY_DF = pd.read_table('CAMEO.country.txt', dtype=str)
+CAMEO_TYPE_DF = pd.read_table('eventcodes/CAMEO.type.txt', dtype=str)
+CAMEO_KNOWNGROUP_DF = pd.read_table('eventcodes/CAMEO.knowngroup.txt',
+                                    dtype=str)
+CAMEO_ETHNIC_DF = pd.read_table('eventcodes/CAMEO.ethnic.txt', dtype=str)
+CAMEO_RELIGION_DF = pd.read_table('eventcodes/CAMEO.religion.txt', dtype=str)
+CAMEO_COUNTRY_DF = pd.read_table('eventcodes/CAMEO.country.txt', dtype=str)
 
-FIPS_CODES = pd.read_csv('wikipedia-fips-codes.csv')
-ISO_CODES = pd.read_csv('wikipedia-iso-country-codes.csv')
+FIPS_CODES = pd.read_csv('eventcodes/wikipedia-fips-codes.csv')
+ISO_CODES = pd.read_csv('eventcodes/wikipedia-iso-country-codes.csv')
 
 
 def url_domain(url):

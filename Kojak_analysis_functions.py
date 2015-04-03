@@ -11,7 +11,8 @@ WEST_EUROPE = ('Belgium', 'Denmark', 'Finland', 'France', 'Germany', 'Greece',
                'Italy', 'Luxembourg', 'Netherlands', 'Norway', 'Portugal',
                'Spain', 'Sweden', 'United Kingdom')
 
-NORTH_AMERICA = ('Canada', 'Mexico', 'United States')
+# NORTH_AMERICA = ('Canada', 'Mexico', 'United States')
+NORTH_AMERICA = ('Canada', 'United States')
 
 CONTINENTS = {}
 for country in WEST_EUROPE:
@@ -21,7 +22,7 @@ for country in NORTH_AMERICA:
 
 
 EVENTS = []
-with open('events.txt', 'r') as f:
+with open('eventcodes/events.txt', 'r') as f:
     for line in f:
         EVENTS.append(line.strip('\n'))
 
@@ -52,6 +53,28 @@ def filter_by_country_event(df, country, event):
     return df.loc[cond1 & cond2, :]
 
 
+def alltopics_world(df):
+    """Sum of all the topics in the current world
+    (NORTH_AMERICA or WEST_EUROPE)"""
+
+    alltopics_world = df.groupby('EVENTDESCRIPTION').count().\
+        to_dict()['DomainCountry']
+
+    sumworld = 0
+    for v in alltopics_world.itervalues():
+        sumworld += v
+
+    return sumworld
+
+
+def alltopics_country(df, country):
+    """Sum of all the topics in the country"""
+
+    events_dict = df.groupby('DomainCountry', sort=False).count().\
+        to_dict()['EVENTDESCRIPTION']
+    return events_dict[country]
+
+
 def tf_idfs(df, continent):
     """For each country in the continent, create a dictionary of tf-idfs with
     all the 310 possible events
@@ -76,12 +99,13 @@ def tf_idfs(df, continent):
             tf = len(filter_by_country_event(df, country, event).index)
 
             if event not in alltopics_world:
-                country_dict[event] = np.nan
+                continue
+                # country_dict[event] = np.nan
             elif tf == 0:
                 country_dict[event] = 0
             else:
                 idf1 = alltopics_world[event]
-                tfidf = float(tf) / idf1 / allevents
+                tfidf = np.float_(tf) / idf1 / allevents
                 country_dict[event] = tfidf
 
         print country_dict
