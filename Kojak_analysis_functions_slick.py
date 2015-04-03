@@ -13,7 +13,6 @@ WEST_EUROPE = ('Belgium', 'Denmark', 'Finland', 'France', 'Germany', 'Greece',
                'Spain', 'Sweden', 'United Kingdom')
 
 NORTH_AMERICA = ('Canada', 'Mexico', 'United States')
-# NORTH_AMERICA = ('Canada', 'United States')
 
 CONTINENTS = {}
 for country in WEST_EUROPE:
@@ -72,20 +71,24 @@ def generic_df_event_count(df):
     """Returns a dataframe whose index is the events,
     with the count per events as columns"""
 
-    return df.groupby(by='EVENTDESCRIPTION').count()
+    # return df.groupby(by='EVENTDESCRIPTION').count()
+    return df.groupby(by='EVENTDESCRIPTION').agg({'DomainCountry':
+                                                 pd.Series.count,
+                                                 'AvgTone': np.mean})
 
 
 def final_df(df, dfs):
     """Takes the world df, and the dictionary of countries dfs, combines them
     into one big dataframe of event counts"""
 
-    column_names = ['world']
+    column_names = ['world tone', 'world count']
     big_df = generic_df_event_count(df)
     for country in dfs.iterkeys():
         country_df = generic_df_event_count(dfs[country])
         big_df = pd.merge(big_df, country_df, left_index=True,
                           right_index=True, how='left')
-        column_names.append(country)
+        column_names.extend([country + ' tone', country + ' count'])
+        # column_names.append(country)
     big_df.columns = column_names
 
     return big_df
@@ -133,8 +136,3 @@ if __name__ == '__main__':
     dfs = split_df_by_country(world, NORTH_AMERICA)
     tfs = tfids_df(final_df)
     tfs_to_tsv(tfs)
-
-
-
-
-
