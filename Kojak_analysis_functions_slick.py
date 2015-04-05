@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import GDELT_loader as loader
 import os
-from math import log10, floor
 
 pd.set_option('display.multi_sparse', False)
 
@@ -99,34 +98,50 @@ def tfids_df(finaldf):
 
     all_counts = finaldf.sum()
     tfidfs = pd.DataFrame()
-    print 'world:', all_counts['world']
+    print 'world count:', all_counts['world count']
 
-    for country in finaldf.columns[1:]:
-        print country, all_counts[country]
-        tfidfs[country] = (finaldf[country] * all_counts['world']) /\
-            (finaldf['world'] * all_counts[country])
+    for country in finaldf.columns[2:]:
+        if 'count' not in country:
+            tfidfs[country] = finaldf[country]
+        else:
+            print country, all_counts[country]
+            tfidfs[country] = (finaldf[country] * all_counts['world count']) /\
+                (finaldf['world count'] * all_counts[country])
 
     return tfidfs
 
 
-def round_sig(x, sig=2):
-    return round(x, sig-int(floor(log10(x)))-1)
+def Round_To_n(x, n=2):
+    if x == 0.:
+        return x
+    else:
+        return round(x, -int(np.floor(np.sign(x) * np.log10(abs(x)))) + n)
+
+
+def get_countryname(df):
+    """Take the country name from a df with tone and count columns"""
+
+    label = df.columns[1]
+    if 'tone' in label:
+        return label.rstrip('tone').rstrip()
+    elif 'count' in label:
+        return label.rstrip('count').rstrip()
 
 
 def tfs_to_tsv(tfs_df):
     """Sorts the tfs and writes out a tsv per country"""
 
-    for country in tfs_df.columns:
-        tmp = tfs_df[country].order(ascending=False)
+    for i in range(0, len(tfs_df.columns), 2):
+        tmp = pd.DataFrame(tfs_df.iloc[:, [i, i+1]])
+        tmp.sort(tmp.columns[1], ascending=False, inplace=True)
         tmp.dropna(inplace=True)
-        if country == "United States":
-            tmp = tmp.apply(round_sig, args=(5,))
-        else:
-            tmp = tmp.apply(round_sig)
+        tmp.iloc[:, 0] = tmp.iloc[:, 0].apply(Round_To_n)
+        tmp.iloc[:, 1] = tmp.iloc[:, 1].apply(Round_To_n)
+        country = get_countryname(tmp)
         tsv_name = str(country + '.tsv')
         tsv_name = tsv_name.replace(" ", "")
-        os.system('echo "Event\tvalue" > %s' % tsv_name)
-        tmp.to_csv(('tmp_%s' % tsv_name), sep='\t')
+        os.system('echo "Event\ttone\tvalue" > %s' % tsv_name)
+        tmp.to_csv(('tmp_%s' % tsv_name), sep='\t', header=False)
         os.system('cat tmp_%s >> %s' % (tsv_name, tsv_name))
         os.system('rm -f tmp_%s' % tsv_name)
 
