@@ -111,11 +111,13 @@ def tfids_df(finaldf):
     return tfidfs
 
 
-def Round_To_n(x, n=2):
+def Round_To_n(x, n=1):
     if x == 0.:
         return x
-    else:
+    elif x > 0:
         return round(x, -int(np.floor(np.sign(x) * np.log10(abs(x)))) + n)
+    else:
+        return round(x, -int(np.floor(np.sign(x) * np.log10(abs(x)))))
 
 
 def get_countryname(df):
@@ -135,8 +137,8 @@ def tfs_to_tsv(tfs_df):
         tmp = pd.DataFrame(tfs_df.iloc[:, [i, i+1]])
         tmp.sort(tmp.columns[1], ascending=False, inplace=True)
         tmp.dropna(inplace=True)
-        tmp.iloc[:, 0] = tmp.iloc[:, 0].apply(Round_To_n)
-        tmp.iloc[:, 1] = tmp.iloc[:, 1].apply(Round_To_n)
+        tmp.iloc[:, 0] = tmp.iloc[:, 0].apply(Round_To_n, args=(1,))
+        # tmp.iloc[:, 1] = tmp.iloc[:, 1].apply(Round_To_n)
         country = get_countryname(tmp)
         tsv_name = str(country + '.tsv')
         tsv_name = tsv_name.replace(" ", "")
