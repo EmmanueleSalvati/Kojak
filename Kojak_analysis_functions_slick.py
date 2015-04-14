@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import GDELT_loader as loader
 import os
+import csv
 
 pd.set_option('display.multi_sparse', False)
 
@@ -100,13 +101,17 @@ def tfids_df(finaldf):
     tfidfs = pd.DataFrame()
     print 'world count:', all_counts['world count']
 
-    for country in finaldf.columns[2:]:
-        if 'count' not in country:
-            tfidfs[country] = finaldf[country]
-        else:
-            print country, all_counts[country]
-            tfidfs[country] = (finaldf[country] * all_counts['world count']) /\
-                (finaldf['world count'] * all_counts[country])
+    with open('tot_events.csv', 'wb') as csvfile:
+        csvwriter = csv.writer(csvfile, delimiter=',')
+        csvwriter.writerow(['DomainCountry', 'NumEvents'])
+        for country in finaldf.columns[2:]:
+            if 'count' not in country:
+                tfidfs[country] = finaldf[country]
+            else:
+                print country, all_counts[country]
+                csvwriter.writerow([country, all_counts[country]])
+                tfidfs[country] = (finaldf[country] * all_counts['world count']) /\
+                    (finaldf['world count'] * all_counts[country])
 
     return tfidfs
 

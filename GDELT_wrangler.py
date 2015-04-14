@@ -52,7 +52,7 @@ gdelt_base_url = 'http://data.gdeltproject.org/events/'
 local_path = '/Users/JerkFace/Metis/Projects/Kojak/'
 
 # Load the table of countries' news
-SOURCE_DF = pd.read_table('DOMAINSBYCOUNTRY-ENGLISH.TXT')
+SOURCE_DF = pd.read_table('eventcodes/DOMAINSBYCOUNTRY-ENGLISH.TXT')
 SOURCE_DF.drop(['FIPSCountryCode'], axis=1, inplace=True)
 SOURCE_DF.set_index('Domain', inplace=True)
 SOURCE_DICT = SOURCE_DF.to_dict()['CountryHumanName']
@@ -344,7 +344,7 @@ def my_parser(in_file_name):
     uses only the rows which have a URL from a source contained in SOURCE_DF,
     write an outfile, trash the infile"""
 
-    colnames = pd.read_excel('CSV.header.fieldids.xlsx', sheetname='Sheet1',
+    colnames = pd.read_excel('eventcodes/CSV.header.fieldids.xlsx', sheetname='Sheet1',
                              index_col='Column ID', parse_cols=1)['Field Name']
 
     with open(in_file_name, 'r') as infile:
